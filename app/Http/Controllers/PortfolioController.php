@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Entities\Project;
 
 class PortfolioController extends Controller
 {
@@ -13,13 +15,16 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $portfolio = [
-          ['title' => 'Proyecto #1'],
-          ['title' => 'Proyecto #2'],
-          ['title' => 'Proyecto #3'],
-          ['title' => 'Proyecto #4'],
-        ];
-        return view('portfolio', compact('portfolio'));
+        // $portfolio = [
+        //   ['title' => 'Proyecto #1'],
+        //   ['title' => 'Proyecto #2'],
+        //   ['title' => 'Proyecto #3'],
+        //   ['title' => 'Proyecto #4'],
+        // ];
+        // $portfolio = DB::table('projects')->get();
+        $projects = Project::latest('created_at')->paginate(2); //Project::orderBy('created_at', 'DESC')->get(); //Project::all();
+
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -52,6 +57,8 @@ class PortfolioController extends Controller
     public function show($id)
     {
         //
+        $project = Project::find($id);
+        return view('projects.show', compact('project'));
     }
 
     /**

@@ -20,19 +20,21 @@ if (!function_exists('routeLocale')) {
      * @param String $locale
      * @return String
      */
-    function routeLocale(String $route, String $locale=null): String
+    function routeLocale(String $route, $data=null, String $locale=null): String
     {
+        // * Note: Read more about Route::class => https://laravel.com/api/5.8/Illuminate/Routing/Route.html
+
         if ($locale) {
-            return route("{$locale}.{$route}");
+            return route("{$locale}.{$route}", $data);
         }
-        return route(App::getLocale().".{$route}");
+        return route(app()->getLocale().".{$route}", $data);
     }
 }
 
 if (!function_exists('currentRoute')) {
     function currentRoute($lang='en') : String
     {
-        return routeLocale(substr(Route::currentRouteName(), 3), $lang);
+        return routeLocale(substr(Route::currentRouteName(), 3), Route::current()->parameters, $lang);
     }
 }
 
