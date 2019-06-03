@@ -5,18 +5,18 @@
 @section('content')
 <h1>@lang('Contact')</h1>
 
-<form action="{{ route('contact.store') }}" method="post">
+<form action="{{ routeLocale('contact.store') }}" method="post">
   @csrf
   <div>
-    <input type="text" name="name" id="" value="{{ old('name') }}" placeholder="Nombre:" required>
+    <input type="text" name="name" id="" value="{{ old('name') }}" placeholder="Nombre:" title="Nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
     {!! $errors->first('name','<small>:message</small>') !!}
   </div>
   <div>
-    <input type="email" name="email" id="" value="{{ old('email') }}" placeholder="Correo eléctronico:" required>
+    <input type="email" name="email" title="Correo eléctronico" id="" value="{{ old('email') }}" placeholder="Correo eléctronico:" required>
     {!! $errors->first('email','<small>:message</small>') !!}
   </div>
   <div>
-    <input type="text" name="subject" id="" value="{{ old('subject') }}" placeholder="Asunto:" required>
+    <input type="text" name="subject" title="asunto" id="" value="{{ old('subject') }}" placeholder="Asunto:" required>
     {!! $errors->first('subject','<small>:message</small>') !!}
   </div>
   <div>

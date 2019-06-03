@@ -1,8 +1,8 @@
 <ul>
     <li>
-      <a href="{{ routeLocale(substr(Route::currentRouteName(),3),'es') }}">es</a>
+      <a href="{{ currentRoute('es') }}">es</a>
     </li>
     <li>
-      <a href="{{ routeLocale(substr(Route::currentRouteName(),3),'en') }}">en</a>
+      <a href="{{ currentRoute('en') }}">en</a>
     </li>
 </ul>

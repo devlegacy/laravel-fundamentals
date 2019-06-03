@@ -1,15 +1,16 @@
+
 <nav>
   <ul>
-    <li class="{{ setNavActive('home') }}">
+    <li class="{{ setNavActiveClass('home') }}">
       <a href="{{ routeLocale('home') }}">@lang('Home')</a>
     </li>
-    <li class="{{ setNavActive('about') }}">
+    <li class="{{ setNavActiveClass('about') }}">
       <a href="{{routeLocale('about')}}">@lang('About')</a>
     </li>
-    <li class="{{ setNavActive('portfolio') }}">
+    <li class="{{ setNavActiveClass('portfolio') }}">
       <a href="{{routeLocale('portfolio')}}">@lang('Portfolio')</a>
     </li>
-    <li class="{{ setNavActive('contact') }}">
+    <li class="{{ setNavActiveClass('contact') }}">
       <a href="{{routeLocale('contact')}}">@lang('Contact')</a>
     </li>
   </ul>

@@ -72,9 +72,9 @@
 
 
 // Default route
-Route::get('/', function () {
-    return redirect('/es');
-});
+// Route::get('/', function () {
+//     return redirect('/es');
+// });
 
 // Langs for routing
 $langs = ['es','en'];

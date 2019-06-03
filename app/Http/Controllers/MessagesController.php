@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\MessageReceived;
+use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
@@ -15,7 +16,7 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(
+        $message = request()->validate(
             [
               'name' => 'required',
               'email' => 'required|email',
@@ -26,8 +27,10 @@ class MessagesController extends Controller
               'name.required' => __('The app need your name'),
             ]
         );
-
-        Mail::to('samuel@devexteam.com')->send(new MessageReceived);
+        /**
+         * Siempre usar queue como recomendación
+         */
+        Mail::to('samuel@devexteam.com')->queue(new MessageReceived($message));
 
         return 'Mensaje enviado';
     }
