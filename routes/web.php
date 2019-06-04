@@ -90,7 +90,13 @@ foreach ($langs as $key => $lang) {
             Route::view(getUriByLang('about', $lang), 'about')->name(getRouteNameByLang('about', $lang));
             Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
             Route::get(getUriByLang('portfolio', $lang), 'ProjectController@index')->name(getRouteNameByLang('projects.index', $lang));
-            Route::get(getUriByLang('portfolio', $lang).'/{id}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
+            /**
+             * ! Las rutas deben estar ordenadas
+             * ! Las rutas funcionan como un switch y el orden es importante
+             */
+            Route::get(getUriByLang('portfolio', $lang).'/'.__('create', [], $lang), 'ProjectController@create')->name(getRouteNameByLang('projects.create', $lang));
+            Route::post(getUriByLang('portfolio', $lang).'/', 'ProjectController@store')->name(getRouteNameByLang('projects.store', $lang));
+            Route::get(getUriByLang('portfolio', $lang).'/{project}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
             Route::post(getUriByLang('contact', $lang), 'MessageController@store')->name(getRouteNameByLang('contact.store', $lang));
         }
     );

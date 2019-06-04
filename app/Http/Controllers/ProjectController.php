@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Entities\Project;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -34,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -45,7 +46,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = request()->validate([
+          'title' => 'required',
+          'description' => 'required',
+        ]);
+        $fields = array_merge($fields, ['slug'=>Str::slug(request('title'))]);
+
+        // request()->all();
+        // request()->only(['title','description']);
+        // Project::create([
+        //   'title'=> request('title'),
+        //   'description'=> request('description'),
+        //   'slug'=> Str::slug(request('title')),
+        // ]);
+        Project::create($fields);
     }
 
     /**
@@ -54,10 +68,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
         //
-        $project = Project::findOrFail($id);
+        // $project = Project::findOrFail($project);
         return view('projects.show', compact('project'));
     }
 
