@@ -6,8 +6,8 @@
     <li class="{{ setNavActiveClass('about') }}">
       <a href="{{routeLocale('about')}}">@lang('About')</a>
     </li>
-    <li class="{{ setNavActiveClass('portfolio') }}">
-      <a href="{{routeLocale('portfolio.index')}}">@lang('Portfolio')</a>
+    <li class="{{ setNavActiveClass('projects.*') }}">
+      <a href="{{routeLocale('projects.index')}}">@lang('Projects')</a>
     </li>
     <li class="{{ setNavActiveClass('contact') }}">
       <a href="{{routeLocale('contact')}}">@lang('Contact')</a>

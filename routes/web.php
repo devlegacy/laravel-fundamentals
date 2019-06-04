@@ -89,9 +89,9 @@ foreach ($langs as $key => $lang) {
             Route::view('/', 'home')->name("{$lang}.home");
             Route::view(getUriByLang('about', $lang), 'about')->name(getRouteNameByLang('about', $lang));
             Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
-            Route::get(getUriByLang('portfolio', $lang), 'PortfolioController@index')->name(getRouteNameByLang('portfolio.index', $lang));
-            Route::get(getUriByLang('portfolio', $lang).'/{id}', 'PortfolioController@show')->name(getRouteNameByLang('portfolio.show', $lang));
-            Route::post(getUriByLang('contact', $lang), 'MessagesController@store')->name(getRouteNameByLang('contact.store', $lang));
+            Route::get(getUriByLang('portfolio', $lang), 'ProjectController@index')->name(getRouteNameByLang('projects.index', $lang));
+            Route::get(getUriByLang('portfolio', $lang).'/{id}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
+            Route::post(getUriByLang('contact', $lang), 'MessageController@store')->name(getRouteNameByLang('contact.store', $lang));
         }
     );
 }
