@@ -86,7 +86,7 @@ foreach ($langs as $key => $lang) {
           'middleware' => 'localization',
         ],
         function () use ($lang) {
-            Route::view('/', 'home')->name("{$lang}.home");
+            Route::view('/', 'home')->name("{$lang}.home"); //->middleware('example');
             Route::view(getUriByLang('about', $lang), 'about')->name(getRouteNameByLang('about', $lang));
             Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
             Route::get(getUriByLang('portfolio', $lang), 'ProjectController@index')->name(getRouteNameByLang('projects.index', $lang));
