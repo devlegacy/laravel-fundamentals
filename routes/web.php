@@ -49,7 +49,7 @@
 // // Ruta con parametro no obligatorio
 // Route::get('saludo/{name?}', function (String $name='Invitado') {
 //     return "Hola {$name}";
-// });
+// })->where(['name'=>'a-zA-Z']);
 
 // Routes
 // Route::get()
