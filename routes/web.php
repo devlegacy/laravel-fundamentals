@@ -86,9 +86,9 @@ foreach ($langs as $key => $lang) {
           'middleware' => 'localization',
         ],
         function () use ($lang) {
-            Route::view('/', 'home')->name("{$lang}.home");
+            Route::view('/', 'home')->name("{$lang}.home"); //->middleware('example');
             Route::view(getUriByLang('about', $lang), 'about')->name(getRouteNameByLang('about', $lang));
-            Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
+            // Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
             Route::get(getUriByLang('portfolio', $lang), 'ProjectController@index')->name(getRouteNameByLang('projects.index', $lang));
             /**
              * ! Las rutas deben estar ordenadas
@@ -97,6 +97,9 @@ foreach ($langs as $key => $lang) {
             Route::get(getUriByLang('portfolio', $lang).'/'.__('create', [], $lang), 'ProjectController@create')->name(getRouteNameByLang('projects.create', $lang));
             Route::post(getUriByLang('portfolio', $lang).'/', 'ProjectController@store')->name(getRouteNameByLang('projects.store', $lang));
             Route::get(getUriByLang('portfolio', $lang).'/{project}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
+
+            Route::get(getUriByLang('contact', $lang), 'MessageController@index')->name(getRouteNameByLang('contact.index', $lang));
+            Route::get(getUriByLang('contact', $lang).'/'.__('create', [], $lang), 'MessageController@create')->name(getRouteNameByLang('contact.create', $lang));
             Route::post(getUriByLang('contact', $lang), 'MessageController@store')->name(getRouteNameByLang('contact.store', $lang));
         }
     );

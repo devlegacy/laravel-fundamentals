@@ -9,6 +9,10 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('example')->only([])->except([]);
+    }
     /**
      * Display a listing of the resource.
      *

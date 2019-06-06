@@ -9,8 +9,8 @@
     <li class="{{ setNavActiveClass('projects.*') }}">
       <a href="{{routeLocale('projects.index')}}">@lang('Projects')</a>
     </li>
-    <li class="{{ setNavActiveClass('contact') }}">
-      <a href="{{routeLocale('contact')}}">@lang('Contact')</a>
+    <li class="{{ setNavActiveClass('contact.*') }}">
+      <a href="{{routeLocale('contact.index')}}">@lang('Contact')</a>
     </li>
   </ul>
 </nav>

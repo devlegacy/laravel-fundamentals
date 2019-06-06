@@ -8,8 +8,12 @@
 
   <style>
     .active a{
-      color:red;
+      color:green;
       text-decoration: none;
+    }
+    .error {
+      color:red;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -18,5 +22,8 @@
   @include('layouts.partials.lang')
   @include('layouts.partials.nav')
   @yield('content')
+  <footer>
+    Copyright © {{ date('Y') }}
+  </footer>
 </body>
 </html>
