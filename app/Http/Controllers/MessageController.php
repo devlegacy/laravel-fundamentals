@@ -69,4 +69,15 @@ class MessageController extends Controller
         return back()
                 ->with('info', 'Tú mensaje ha sido enviado correctamente');
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(int $id)
+    {
+        $message = DB::table('messages')->where('id', $id)->get()->first();
+        return view('messages.show', compact('message'));
+    }
 }

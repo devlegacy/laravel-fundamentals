@@ -100,6 +100,7 @@ foreach ($langs as $key => $lang) {
 
             Route::get(getUriByLang('contact', $lang), 'MessageController@index')->name(getRouteNameByLang('contact.index', $lang));
             Route::get(getUriByLang('contact', $lang).'/'.__('create', [], $lang), 'MessageController@create')->name(getRouteNameByLang('contact.create', $lang));
+            Route::get(getUriByLang('contact', $lang).'/{id}', 'MessageController@show')->name(getRouteNameByLang('contact.show', $lang));
             Route::post(getUriByLang('contact', $lang), 'MessageController@store')->name(getRouteNameByLang('contact.store', $lang));
         }
     );
