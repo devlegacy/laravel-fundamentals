@@ -9,8 +9,21 @@
     <li class="{{ setNavActiveClass('projects.*') }}">
       <a href="{{routeLocale('projects.index')}}">@lang('Projects')</a>
     </li>
-    <li class="{{ setNavActiveClass('contact.*') }}">
-      <a href="{{routeLocale('contact.index')}}">@lang('Contact')</a>
+    <li class="{{ setNavActiveClass('messages.create') }}">
+      <a href="{{routeLocale('messages.create')}}">@lang('Contact')</a>
+    </li>
+    @auth
+      <li class="{{ setNavActiveClass('messages.index') }}">
+        <a href="{{routeLocale('messages.index')}}">@lang('Messages')</a>
+      </li>
+      <li>
+          <a href="/logout">Cerrar sesión</a>
+        </li>
+    @endauth
+    <li>
+        @guest
+            <a href="/login">Login</a>
+        @endguest
     </li>
   </ul>
 </nav>

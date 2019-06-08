@@ -8,7 +8,7 @@ class Project extends Model
 {
     // protected $table = '';
     protected $fillable = ['title','description','slug'];
-    protected $guarder = [];
+    protected $guarder = []; // ['id','created_at','updated_at'];
 
     public function getRouteKeyName()
     {

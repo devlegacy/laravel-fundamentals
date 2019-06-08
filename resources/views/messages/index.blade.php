@@ -13,16 +13,27 @@
         <th>Asunto</th>
         <th>Correo eléctronico</th>
         <th>Mensaje</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
         @forelse ($messages as $message)
             <tr>
               <td>{{$message->id}}</td>
-              <td>{{$message->name}}</td>
+              <td>
+                <a href="{{routeLocale('messages.show',$message->id)}}">{{$message->name}}</a>
+              </td>
               <td>{{$message->subject}}</td>
               <td>{{$message->email}}</td>
               <td>{{$message->content}}</td>
+              <td>
+                <a href="{{routeLocale('messages.edit',$message->id)}}">Editar</a>
+                <form style="display:inline;" action="{{routeLocale('messages.destroy',$message->id)}}" method="POST">
+                  @csrf
+                  @method('delete')
+                  <button type="submit">Eliminar</button>
+                </form>
+              </td>
             </tr>
         @empty
             <tr>

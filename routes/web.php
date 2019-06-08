@@ -98,10 +98,14 @@ foreach ($langs as $key => $lang) {
             Route::post(getUriByLang('portfolio', $lang).'/', 'ProjectController@store')->name(getRouteNameByLang('projects.store', $lang));
             Route::get(getUriByLang('portfolio', $lang).'/{project}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
 
-            Route::get(getUriByLang('contact', $lang), 'MessageController@index')->name(getRouteNameByLang('contact.index', $lang));
-            Route::get(getUriByLang('contact', $lang).'/'.__('create', [], $lang), 'MessageController@create')->name(getRouteNameByLang('contact.create', $lang));
-            Route::get(getUriByLang('contact', $lang).'/{id}', 'MessageController@show')->name(getRouteNameByLang('contact.show', $lang));
-            Route::post(getUriByLang('contact', $lang), 'MessageController@store')->name(getRouteNameByLang('contact.store', $lang));
+            Route::get(getUriByLang('messages', $lang), 'MessageController@index')->name(getRouteNameByLang('messages.index', $lang));
+            Route::get(getUriByLang('messages', $lang).'/'.__('create', [], $lang), 'MessageController@create')->name(getRouteNameByLang('messages.create', $lang));
+            Route::get(getUriByLang('messages', $lang).'/{id}', 'MessageController@show')->name(getRouteNameByLang('messages.show', $lang));
+            Route::get(getUriByLang('messages', $lang).'/{id}/'.__('edit', [], $lang), 'MessageController@edit')->name(getRouteNameByLang('messages.edit', $lang));
+            Route::post(getUriByLang('messages', $lang), 'MessageController@store')->name(getRouteNameByLang('messages.store', $lang));
+            Route::put(getUriByLang('messages', $lang).'/{id}', 'MessageController@update')->name(getRouteNameByLang('messages.update', $lang));
+            Route::delete(getUriByLang('messages', $lang).'/{id}', 'MessageController@destroy')->name(getRouteNameByLang('messages.destroy', $lang));
+            // Route::resource(getUriByLang('messages', $lang), 'MessageController');
         }
     );
 }

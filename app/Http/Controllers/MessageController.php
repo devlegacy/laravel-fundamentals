@@ -7,8 +7,9 @@ use App\Mail\MessageReceived;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CreateMessageRequest;
 use Symfony\Component\HttpFoundation\Response;
-use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Entities\Message;
 
 class MessageController extends Controller
 {
@@ -19,7 +20,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = DB::table('messages')->get();
+        // $messages = DB::table('messages')->get();
+        $messages = Message::all();
         return view('messages.index', compact('messages'));
     }
 
@@ -48,15 +50,15 @@ class MessageController extends Controller
          */
         Mail::to('samuel@devexteam.com')->queue(new MessageReceived($message));
 
-        DB::table('messages')->insert([
-          'name' => request('name'),
-          'subject' => request('subject'),
-          'email' => request('email'),
-          'content' => request('content'),
-          'created_at' => Carbon::now(),
-          'updated_at' => Carbon::now(),
-        ]);
-
+        // DB::table('messages')->insert([
+        //   'name' => request('name'),
+        //   'subject' => request('subject'),
+        //   'email' => request('email'),
+        //   'content' => request('content'),
+        //   'created_at' => Carbon::now(),
+        //   'updated_at' => Carbon::now(),
+        // ]);
+        Message::create($message);
 
         // return response('Contenido de la respuesta', 201)
         //         ->header('X-TOKEN', 'secret')
@@ -77,7 +79,54 @@ class MessageController extends Controller
      */
     public function show(int $id)
     {
-        $message = DB::table('messages')->where('id', $id)->get()->first();
+        // $message = DB::table('messages')->where('id', $id)->first();
+        $message = Message::findOrFail($id);
         return view('messages.show', compact('message'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        // $message = DB::table('messages')->where('id', $id)->first();
+        $message = Message::findOrFail($id);
+        return view('messages.edit', compact('message'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        // DB::table('messages')->where('id', $id)->update([
+        //   'name' => request('name'),
+        //   'subject' => request('subject'),
+        //   'email' => request('email'),
+        //   'content' => request('content'),
+        //   'updated_at' => Carbon::now(),
+        // ]);
+        Message::findOrFail($id)->update(request()->all());
+        return redirect()->route(app()->getLocale().".messages.index");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        // DB::table('messages')->where('id', $id)->delete();
+        Message::findOrFail($id)->delete();
+        return redirect()->route(app()->getLocale().".messages.index");
     }
 }
