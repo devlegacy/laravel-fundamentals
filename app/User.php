@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Validate user role
+     *
+     * @param String $role
+     * @return boolean
+     */
+    public function hasRoles(array $roles = ['administrador']) : bool
+    {
+        foreach ($roles as $key => $rol) {
+            if ($this->role === $rol) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

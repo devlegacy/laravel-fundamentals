@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'localization' => \App\Http\Middleware\Localization::class,
 
         'example' => \App\Http\Middleware\Example::class,
+        'roles' => \App\Http\Middleware\CheckUserRole::class,
     ];
 
     /**

@@ -12,13 +12,17 @@
 <body>
   {{-- @include('partials.test') --}}
   {{-- @include('layouts.partials.lang') --}}
-  <div class="container">
-    @include('layouts.partials.nav')
-    @yield('content')
-    <footer>
-      Copyright © {{ date('Y') }}
-    </footer>
-  </div>
+  @include('layouts.partials.nav')
+  <main role="main">
+      <div class="container">
+          @yield('content')
+      </div>
+  </main>
+  <footer class="text-muted">
+      <div class="container">
+          Copyright © {{ date('Y') }}
+      </div>
+  </footer>
   <script src="/js/app.js"></script>
 </body>
 </html>

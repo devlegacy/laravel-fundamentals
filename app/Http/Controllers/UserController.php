@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {   /**
+         * Pasar parametros al middleware mediante :
+         */
+        $this->middleware(['auth','roles:administrador,estudiante']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
