@@ -22,6 +22,9 @@
           <li class="nav-item {{ setNavActiveClass('messages.index') }} {{ setNavActiveClass('messages.edit') }}">
             <a class="nav-link" href="{{route('messages.index')}}">@lang('Messages')</a>
           </li>
+          <li class="nav-item {{ setNavActiveClass('users.*') }}">
+            <a class="nav-link" href="{{route('users.index')}}">@lang('Users')</a>
+          </li>
         @endauth
       </ul>
       <ul class="navbar-nav">
@@ -31,8 +34,14 @@
             </li>
         @endguest
         @auth
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Cerrar sesión de {{auth()->user()->name}}</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{auth()->user()->name}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Cerrar sesión</a>
+              </div>
             </li>
         @endauth
       </ul>

@@ -113,6 +113,14 @@
 //     $user = new \App\User();
 //     $user->name = 'Samuel';
 //     $user->email = 'samuel@gmail.com';
+//     $user->role = 'administrador';
+//     $user->password = \Hash::make('password');
+//     $user->save();
+
+//     $user = new \App\User();
+//     $user->name = 'Demo';
+//     $user->email = 'demo@gmail.com';
+//     $user->role = 'moderador';
 //     $user->password = \Hash::make('password');
 //     $user->save();
 
@@ -122,7 +130,8 @@
 Route::view('/', 'home')->name("home");
 Route::view('/acerca-de', 'about')->name('about');
 Route::resource('portafolio', 'ProjectController')->names('projects');
-Route::resource('mensajes', 'MessageController')->names('messages');
+Route::resource('mensaje', 'MessageController')->names('messages');
+Route::resource('usuario', 'UserController')->names('users');
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
