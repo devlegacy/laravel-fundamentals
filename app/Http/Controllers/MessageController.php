@@ -114,7 +114,7 @@ class MessageController extends Controller
         //   'updated_at' => Carbon::now(),
         // ]);
         Message::findOrFail($id)->update(request()->all());
-        return redirect()->route(app()->getLocale().".messages.index");
+        return redirect()->route('messages.index');
     }
 
     /**
@@ -127,6 +127,6 @@ class MessageController extends Controller
     {
         // DB::table('messages')->where('id', $id)->delete();
         Message::findOrFail($id)->delete();
-        return redirect()->route(app()->getLocale().".messages.index");
+        return redirect()->route('messages.index');
     }
 }

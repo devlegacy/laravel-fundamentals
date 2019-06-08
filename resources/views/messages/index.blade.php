@@ -21,14 +21,14 @@
             <tr>
               <td>{{$message->id}}</td>
               <td>
-                <a href="{{routeLocale('messages.show',$message->id)}}">{{$message->name}}</a>
+                <a href="{{route('messages.show',$message->id)}}">{{$message->name}}</a>
               </td>
               <td>{{$message->subject}}</td>
               <td>{{$message->email}}</td>
               <td>{{$message->content}}</td>
               <td>
-                <a href="{{routeLocale('messages.edit',$message->id)}}">Editar</a>
-                <form style="display:inline;" action="{{routeLocale('messages.destroy',$message->id)}}" method="POST">
+                <a href="{{route('messages.edit',$message->id)}}">Editar</a>
+                <form style="display:inline;" action="{{route('messages.destroy',$message->id)}}" method="POST">
                   @csrf
                   @method('delete')
                   <button type="submit">Eliminar</button>

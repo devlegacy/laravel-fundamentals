@@ -1,5 +1,5 @@
 <?php
-if (!function_exists('setNavActive')) {
+if (!function_exists('setNavActiveClass')) {
     /**
      * Return the css class for route name active
      *
@@ -8,7 +8,8 @@ if (!function_exists('setNavActive')) {
      */
     function setNavActiveClass(String $routeName = 'home') : String
     {
-        return request()->routeIs(App::getLocale().".{$routeName}") ? 'active' : '';
+        // return request()->routeIs(App::getLocale().".{$routeName}") ? 'active' : '';
+        return request()->routeIs($routeName) ? 'active' : '';
     }
 }
 

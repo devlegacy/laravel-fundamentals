@@ -77,35 +77,39 @@
 // });
 
 // Langs for routing
-$langs = ['es','en'];
+// $langs = ['es','en'];
 
-foreach ($langs as $key => $lang) {
-    Route::group(
-        [
-          'prefix'=> $lang,
-          'middleware' => 'localization',
-        ],
-        function () use ($lang) {
-            Route::view('/', 'home')->name("{$lang}.home"); //->middleware('example');
-            Route::view(getUriByLang('about', $lang), 'about')->name(getRouteNameByLang('about', $lang));
-            // Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
-            Route::get(getUriByLang('portfolio', $lang), 'ProjectController@index')->name(getRouteNameByLang('projects.index', $lang));
-            /**
-             * ! Las rutas deben estar ordenadas
-             * ! Las rutas funcionan como un switch y el orden es importante
-             */
-            Route::get(getUriByLang('portfolio', $lang).'/'.__('create', [], $lang), 'ProjectController@create')->name(getRouteNameByLang('projects.create', $lang));
-            Route::post(getUriByLang('portfolio', $lang).'/', 'ProjectController@store')->name(getRouteNameByLang('projects.store', $lang));
-            Route::get(getUriByLang('portfolio', $lang).'/{project}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
+// foreach ($langs as $key => $lang) {
+//     Route::group(
+//         [
+//           'prefix'=> $lang,
+//           'middleware' => 'localization',
+//         ],
+//         function () use ($lang) {
+//             Route::view('/', 'home')->name("{$lang}.home"); //->middleware('example');
+//             Route::view(getUriByLang('about', $lang), 'about')->name(getRouteNameByLang('about', $lang));
+//             // Route::view(getUriByLang('contact', $lang), 'contact')->name(getRouteNameByLang('contact', $lang));
+//             Route::get(getUriByLang('portfolio', $lang), 'ProjectController@index')->name(getRouteNameByLang('projects.index', $lang));
+//             /**
+//              * ! Las rutas deben estar ordenadas
+//              * ! Las rutas funcionan como un switch y el orden es importante
+//              */
+//             Route::get(getUriByLang('portfolio', $lang).'/'.__('create', [], $lang), 'ProjectController@create')->name(getRouteNameByLang('projects.create', $lang));
+//             Route::post(getUriByLang('portfolio', $lang).'/', 'ProjectController@store')->name(getRouteNameByLang('projects.store', $lang));
+//             Route::get(getUriByLang('portfolio', $lang).'/{project}', 'ProjectController@show')->name(getRouteNameByLang('projects.show', $lang));
 
-            Route::get(getUriByLang('messages', $lang), 'MessageController@index')->name(getRouteNameByLang('messages.index', $lang));
-            Route::get(getUriByLang('messages', $lang).'/'.__('create', [], $lang), 'MessageController@create')->name(getRouteNameByLang('messages.create', $lang));
-            Route::get(getUriByLang('messages', $lang).'/{id}', 'MessageController@show')->name(getRouteNameByLang('messages.show', $lang));
-            Route::get(getUriByLang('messages', $lang).'/{id}/'.__('edit', [], $lang), 'MessageController@edit')->name(getRouteNameByLang('messages.edit', $lang));
-            Route::post(getUriByLang('messages', $lang), 'MessageController@store')->name(getRouteNameByLang('messages.store', $lang));
-            Route::put(getUriByLang('messages', $lang).'/{id}', 'MessageController@update')->name(getRouteNameByLang('messages.update', $lang));
-            Route::delete(getUriByLang('messages', $lang).'/{id}', 'MessageController@destroy')->name(getRouteNameByLang('messages.destroy', $lang));
-            // Route::resource(getUriByLang('messages', $lang), 'MessageController');
-        }
-    );
-}
+//             Route::get(getUriByLang('messages', $lang), 'MessageController@index')->name(getRouteNameByLang('messages.index', $lang));
+//             Route::get(getUriByLang('messages', $lang).'/'.__('create', [], $lang), 'MessageController@create')->name(getRouteNameByLang('messages.create', $lang));
+//             Route::get(getUriByLang('messages', $lang).'/{id}', 'MessageController@show')->name(getRouteNameByLang('messages.show', $lang));
+//             Route::get(getUriByLang('messages', $lang).'/{id}/'.__('edit', [], $lang), 'MessageController@edit')->name(getRouteNameByLang('messages.edit', $lang));
+//             Route::post(getUriByLang('messages', $lang), 'MessageController@store')->name(getRouteNameByLang('messages.store', $lang));
+//             Route::put(getUriByLang('messages', $lang).'/{id}', 'MessageController@update')->name(getRouteNameByLang('messages.update', $lang));
+//             Route::delete(getUriByLang('messages', $lang).'/{id}', 'MessageController@destroy')->name(getRouteNameByLang('messages.destroy', $lang));
+//             // Route::resource(getUriByLang('messages', $lang), 'MessageController');
+//         }
+//     );
+// }
+Route::view('/', 'home')->name("home");
+Route::view('/acerca-de', 'about')->name('about');
+Route::resource('portafolio', 'ProjectController')->names('projects');
+Route::resource('mensajes', 'MessageController')->names('messages');

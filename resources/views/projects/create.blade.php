@@ -4,7 +4,7 @@
 
 @section('content')
 <h1>@lang('Create new project')</h1>
-  <form method="POST" action="{{ routeLocale('projects.store') }}">
+  <form method="POST" action="{{ route('projects.store') }}">
     @csrf
     <div>
       <label for="title">Título del proyecto</label>

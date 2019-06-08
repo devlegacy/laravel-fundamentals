@@ -19,7 +19,7 @@
 </head>
 <body>
   {{-- @include('partials.test') --}}
-  @include('layouts.partials.lang')
+  {{-- @include('layouts.partials.lang') --}}
   @include('layouts.partials.nav')
   @yield('content')
   <footer>

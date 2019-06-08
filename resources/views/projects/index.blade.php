@@ -7,7 +7,7 @@
 
 <ul>
   @forelse ($projects as $project)
-  <li><a href="{{routeLocale('projects.show',$project)}}">{{ $project->title }}</a></li>
+  <li><a href="{{route('projects.show',$project)}}">{{ $project->title }}</a></li>
    {{--  <li><small>{{$project->description}}</small></li>
     <pre>
       @dump($loop)

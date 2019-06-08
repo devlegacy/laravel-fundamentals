@@ -9,7 +9,7 @@
     <h3>{{session('info')}}</h3>
 @endif
 
-<form action="{{ routeLocale('messages.store') }}" method="post">
+<form action="{{ route('messages.store') }}" method="post">
   @csrf
   <div>
     <input type="text" name="name" id="" value="{{ old('name') }}" placeholder="Nombre:" title="Nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>

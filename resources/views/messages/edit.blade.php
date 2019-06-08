@@ -5,7 +5,7 @@
 @section('content')
 <h1>Editar mensaje</h1>
 
-<form action="{{ routeLocale('messages.update',$message->id) }}" method="post">
+<form action="{{ route('messages.update',$message->id) }}" method="post">
   @csrf
   @method('put')
   <div>
