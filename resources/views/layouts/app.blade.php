@@ -5,25 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title','Default title')</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <style>
-    .active a{
-      color:green;
-      text-decoration: none;
-    }
-    .error {
-      color:red;
-      font-size: 12px;
-    }
-  </style>
 </head>
 <body>
   {{-- @include('partials.test') --}}
   {{-- @include('layouts.partials.lang') --}}
-  @include('layouts.partials.nav')
-  @yield('content')
-  <footer>
-    Copyright © {{ date('Y') }}
-  </footer>
+  <div class="container">
+    @include('layouts.partials.nav')
+    @yield('content')
+    <footer>
+      Copyright © {{ date('Y') }}
+    </footer>
+  </div>
+  <script src="/js/app.js"></script>
 </body>
 </html>

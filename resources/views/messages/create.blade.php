@@ -9,24 +9,28 @@
     <h3>{{session('info')}}</h3>
 @endif
 
-<form action="{{ route('messages.store') }}" method="post">
+<form class="needs-validation" action="{{ route('messages.store') }}" method="post" novalidate>
   @csrf
-  <div>
-    <input type="text" name="name" id="" value="{{ old('name') }}" placeholder="Nombre:" title="Nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
-    {!! $errors->first('name','<span class="error">:message</span>') !!}
+  <div class="form-group">
+    <label for="name">Nombre:</label>
+    <input type="text" name="name" id="name" class="form-control  {{$errors->has('name') ? 'is-invalid': 'is-valid'}}" value="{{ old('name') }}" placeholder="Nombre:" title="Nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
+    {!! $errors->first('name','<div class="invalid-feedback">:message</div>') !!}
   </div>
-  <div>
-    <input type="email" name="email" title="Correo eléctronico" id="" value="{{ old('email') }}" placeholder="Correo eléctronico:" required>
-    {!! $errors->first('email','<span class="error">:message</span>') !!}
+  <div class="form-group">
+    <label for="email">Correo eléctronico:</label>
+    <input type="email" name="email" title="Correo eléctronico" id="email" class="form-control {{$errors->has('email') ? 'is-invalid': 'is-valid'}}" value="{{ old('email') }}" placeholder="Correo eléctronico:" required>
+    {!! $errors->first('email','<div class="invalid-feedback">:message</div>') !!}
   </div>
-  <div>
-    <input type="text" name="subject" title="asunto" id="" value="{{ old('subject') }}" placeholder="Asunto:" required>
-    {!! $errors->first('subject','<span class="error">:message</span>') !!}
+  <div class="form-group">
+    <label for="subject">Asunto:</label>
+    <input type="text" name="subject" title="asunto" id="subject" class="form-control {{$errors->has('subject') ? 'is-invalid': 'is-valid'}}" value="{{ old('subject') }}" placeholder="Asunto:" required>
+    {!! $errors->first('subject','<div class="invalid-feedback">:message</div>') !!}
   </div>
-  <div>
-    <textarea name="content" id="" cols="30" rows="10" placeholder="Mensaje:">{{ old('content') }}</textarea required>
-    {!! $errors->first('content','<span class="error">:message</span>') !!}
+  <div class="form-group">
+    <label for="content">Mensaje:</label>
+    <textarea name="content" id="content" class="form-control {{$errors->has('content') ? 'is-invalid': 'is-valid'}}" cols="30" rows="10" minlength="2" placeholder="Mensaje:" required>{{ old('content') }}</textarea>
+    {!! $errors->first('content','<div class="invalid-feedback">:message</div>') !!}
   </div>
-  <button type="submit">Enviar</button>
+  <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 @endsection

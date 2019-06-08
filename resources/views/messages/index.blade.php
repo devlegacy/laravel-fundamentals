@@ -4,9 +4,9 @@
 
 @section('content')
 <h1>Todos los mensajes</h1>
-
-  <table width="100%" border="1">
-    <thead>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover ">
+    <thead class="thead-dark">
       <tr>
         <th>ID</th>
         <th>Nombre</th>
@@ -26,12 +26,12 @@
               <td>{{$message->subject}}</td>
               <td>{{$message->email}}</td>
               <td>{{$message->content}}</td>
-              <td>
-                <a href="{{route('messages.edit',$message->id)}}">Editar</a>
-                <form style="display:inline;" action="{{route('messages.destroy',$message->id)}}" method="POST">
+              <td class="d-flex justify-content-around">
+                <a class="btn btn-warning btn-sm" href="{{route('messages.edit',$message->id)}}"><i class="fas fa-edit"></i> Editar</a>
+                <form action="{{route('messages.destroy',$message->id)}}" method="POST">
                   @csrf
                   @method('delete')
-                  <button type="submit">Eliminar</button>
+                  <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i> Eliminar</button>
                 </form>
               </td>
             </tr>
@@ -44,6 +44,6 @@
         @endforelse
     </tbody>
   </table>
-
+</div>
 
 @endsection
