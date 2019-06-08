@@ -109,7 +109,21 @@
 //         }
 //     );
 // }
+// Route::get('test', function () {
+//     $user = new \App\User();
+//     $user->name = 'Samuel';
+//     $user->email = 'samuel@gmail.com';
+//     $user->password = \Hash::make('password');
+//     $user->save();
+
+//     return $user;
+// });
+
 Route::view('/', 'home')->name("home");
 Route::view('/acerca-de', 'about')->name('about');
 Route::resource('portafolio', 'ProjectController')->names('projects');
 Route::resource('mensajes', 'MessageController')->names('messages');
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout');

@@ -17,13 +17,15 @@
         <a href="{{route('messages.index')}}">@lang('Messages')</a>
       </li>
       <li>
-          <a href="/logout">Cerrar sesión</a>
-        </li>
+          <a href="/logout">Cerrar sesión de {{auth()->user()->name}}</a>
+      </li>
     @endauth
-    <li>
-        @guest
-            <a href="/login">Login</a>
-        @endguest
-    </li>
+
+    @guest
+      <li>
+          <a href="/login">Login</a>
+      </li>
+    @endguest
+
   </ul>
 </nav>
