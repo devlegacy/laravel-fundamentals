@@ -23,7 +23,7 @@
               <li class="nav-item {{ setNavActiveClass('messages.index') }} {{ setNavActiveClass('messages.edit') }}">
                 <a class="nav-link" href="{{route('messages.index')}}">@lang('Messages')</a>
               </li>
-              @if (auth()->user()->hasRoles(['administrador','estudiantes']))
+              @if (auth()->user()->hasRoles(['administrador']))
                 <li class="nav-item {{ setNavActiveClass('users.*') }}">
                   <a class="nav-link" href="{{route('users.index')}}">@lang('Users')</a>
                 </li>
@@ -42,6 +42,7 @@
                     {{auth()->user()->name}}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/usuario/{{auth()->id()}}/editar">Mi cuenta</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                   </div>

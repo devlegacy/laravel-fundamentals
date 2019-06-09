@@ -16,6 +16,7 @@
       </tr>
     </thead>
     <tbody>
+
         @forelse ($users as $user)
             <tr>
               <td>{{$user->id}}</td>
@@ -23,7 +24,11 @@
                 <a href="{{route('users.show',$user->id)}}">{{$user->name}}</a>
               </td>
               <td>{{$user->email}}</td>
-              <td>{{$user->role}}</td>
+              <td>
+                @foreach ($user->roles as $role)
+                    {{$role->display_name}}
+                @endforeach
+              </td>
               <td class="d-flex justify-content-around">
                 <a class="btn btn-warning btn-sm" href="{{route('users.edit',$user->id)}}"><i class="fas fa-edit"></i> Editar</a>
                 <form action="{{route('users.destroy',$user->id)}}" method="POST">
