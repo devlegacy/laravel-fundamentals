@@ -13,8 +13,8 @@ class UserController extends Controller
     {   /**
          * Pasar parametros al middleware mediante :
          */
-        $this->middleware(['auth',]);
-        $this->middleware(['roles:administrador',])->except(['edit']);
+        $this->middleware(['auth',])->except(['show']);
+        $this->middleware(['roles:administrador',])->except(['edit','update','show']);
     }
     /**
      * Display a listing of the resource.
@@ -56,7 +56,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -68,6 +69,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+
+        $this->authorize('edit', $user);
         return view('users.edit', compact('user'));
     }
 
@@ -80,8 +83,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $data = $request->validated();
-        User::findOrFail($id)->update($data);
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+        $user->update($request->all());
         return back()->with('info', 'Usuario actualizado');
     }
 

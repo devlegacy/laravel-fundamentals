@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','App | '.__('Contact'))
+@section('title','App | '.__('Users'))
 
 @section('content')
 <h1>Editar usuario</h1>

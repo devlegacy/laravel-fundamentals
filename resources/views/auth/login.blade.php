@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','App | '.__('Login'))
 @section('content')
 <form action="/login" method="post">
   @csrf
