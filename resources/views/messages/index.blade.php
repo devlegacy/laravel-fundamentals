@@ -21,11 +21,20 @@
             <tr>
               <td>{{$message->id}}</td>
               <td>
-                <a href="{{route('messages.show',$message->id)}}">{{$message->name}}</a>
+                @if ($message->user_id)
+                  <a href="{{route('users.show',$message->user_id)}}">{{$message->user->name}}</a>
+                @else
+                  {{$message->name}}
+                @endif
               </td>
+
               <td>{{$message->subject}}</td>
-              <td>{{$message->email}}</td>
-              <td>{{$message->content}}</td>
+              <td>{{$message->user_id ? $message->user->email : $message->email}}</td>
+              <td>
+                <a href="{{route('messages.show',$message->id)}}">
+                  {{$message->content}}
+                </a>
+              </td>
               <td class="d-flex justify-content-around">
                 <a class="btn btn-warning btn-sm" href="{{route('messages.edit',$message->id)}}"><i class="fas fa-edit"></i> Editar</a>
                 <form action="{{route('messages.destroy',$message->id)}}" method="POST">

@@ -4,6 +4,7 @@
 
 @section('content')
 <h1>Usuarios</h1>
+<a class="btn btn-primary float-right" href="{{route('users.create')}}">Crear usuario</a>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover ">
     <thead class="thead-dark">

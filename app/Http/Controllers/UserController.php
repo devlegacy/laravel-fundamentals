@@ -34,7 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::pluck('display_name', 'id');
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -71,7 +72,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $this->authorize('edit', $user);
-        return view('users.edit', compact('user'));
+
+        $roles = Role::pluck('display_name', 'id');
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -86,6 +89,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $this->authorize('update', $user);
         $user->update($request->all());
+        $user->roles()->sync(request('roles'));//attach(request('roles'));
         return back()->with('info', 'Usuario actualizado');
     }
 

@@ -9,6 +9,7 @@
       {{ session('info') }}
     </div>
 @endif
+
 <form class="needs-validation" action="{{ route('users.update',$user->id) }}" method="post" novalidate>
     @csrf
     @method('put')
@@ -22,7 +23,19 @@
       <input type="email" name="email" id="email" class="form-control  {{$errors->has('email') ? 'is-invalid': 'is-valid'}}" title="Correo eléctronico" value="{{ $user->email }}" placeholder="Correo eléctronico:" required>
       {!! $errors->first('email','<div class="invalid-feedback">:message</div>') !!}
     </div>
+    <div class="form-check">
+        @foreach ($roles as $id => $name)
+          <input
+          type="checkbox"
+          {{ isset($user) && $user->roles->pluck('id')->contains($id) ? 'checked' : '' }}
+          name="roles[]"
+          value="{{$id}}"
+          class="form-check-input"
+          id="{{$id.'-'.$name}}">
+          <label class="form-check-label" for="{{$id.'-'.$name}}">{{ $name }}</label>
+        @endforeach
 
+    </div>
     <button type="submit" class="btn btn-primary">Editar</button>
   </form>
 @endsection

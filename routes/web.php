@@ -140,6 +140,12 @@
 //     $role->display_name = 'Moderador';
 //     $role->save();
 //     dump($role);
+
+//     $role = new App\Role();
+//     $role->name = 'estudiante';
+//     $role->display_name = 'Estudiante';
+//     $role->save();
+//     dump($role);
 // });
 // Route::get('roles', function () {
 //     // return (App\Role::with('user')->get());
