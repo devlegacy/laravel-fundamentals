@@ -13,6 +13,7 @@
         <th>Asunto</th>
         <th>Correo eléctronico</th>
         <th>Mensaje</th>
+        <th>Notas</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -35,6 +36,9 @@
                   {{$message->content}}
                 </a>
               </td>
+              <td>
+                {{ $message->note->body }}
+              </td>
               <td class="d-flex justify-content-around">
                 <a class="btn btn-warning btn-sm" href="{{route('messages.edit',$message->id)}}"><i class="fas fa-edit"></i> Editar</a>
                 <form action="{{route('messages.destroy',$message->id)}}" method="POST">
@@ -46,7 +50,7 @@
             </tr>
         @empty
             <tr>
-              <td colspan="6">
+              <td colspan="7">
                 <h4>Sin mensajes para mostrar</h4>
               </td>
             </tr>

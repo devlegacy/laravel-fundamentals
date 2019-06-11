@@ -13,6 +13,7 @@
         <th>Nombre</th>
         <th>Correo eléctronico</th>
         <th>Rol</th>
+        <th>Notas</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -30,6 +31,9 @@
                 {{-- @foreach ($user->roles as $role)
                     {{$role->display_name}}
                 @endforeach --}}
+              </td>
+              <td>
+                {{ $user->note->body ?? '' }}
               </td>
               <td class="d-flex justify-content-around">
                 @can('edit', $user)
