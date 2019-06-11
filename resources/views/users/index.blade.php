@@ -25,17 +25,23 @@
               </td>
               <td>{{$user->email}}</td>
               <td>
-                @foreach ($user->roles as $role)
+              {{ $user->roles->pluck('display_name')->implode(', ') }}
+                {{-- @foreach ($user->roles as $role)
                     {{$role->display_name}}
-                @endforeach
+                @endforeach --}}
               </td>
               <td class="d-flex justify-content-around">
+                @can('edit', $user)
                 <a class="btn btn-warning btn-sm" href="{{route('users.edit',$user->id)}}"><i class="fas fa-edit"></i> Editar</a>
+                @endcan
+
+                @can('destroy', $user)
                 <form action="{{route('users.destroy',$user->id)}}" method="POST">
                   @csrf
                   @method('delete')
                   <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i> Eliminar</button>
                 </form>
+                @endcan
               </td>
             </tr>
         @empty

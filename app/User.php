@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
-
+use App\Entities\Message;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -56,18 +56,23 @@ class User extends Authenticatable
      */
     public function hasRoles(array $roles = ['administrador']) : bool
     {
-        foreach ($roles as $key => $role) {
-            foreach ($this->roles as $key => $userRole) {
-                if ($userRole->name === $role) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return $this->roles->pluck('name')->intersect($roles)->count();
+        // foreach ($roles as $key => $role) {
+        //     foreach ($this->roles as $key => $userRole) {
+        //         if ($userRole->name === $role) {
+        //             return true;
+        //         }
+        //     }
+        // }
+        // return false;
     }
 
     public function isAdmin()
     {
         return $this->hasRoles(['administrador']);
+    }
+
+    public function messages() {
+        return $this->hasMany(Message::class);
     }
 }

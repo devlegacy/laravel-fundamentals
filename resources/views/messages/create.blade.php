@@ -11,6 +11,7 @@
 
 <form class="needs-validation" action="{{ route('messages.store') }}" method="post" novalidate>
   @csrf
+  @guest
   <div class="form-group">
     <label for="name">Nombre:</label>
     <input type="text" name="name" id="name" class="form-control  {{$errors->has('name') ? 'is-invalid': 'is-valid'}}" value="{{ old('name') }}" placeholder="Nombre:" title="Nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
@@ -21,6 +22,7 @@
     <input type="email" name="email" title="Correo eléctronico" id="email" class="form-control {{$errors->has('email') ? 'is-invalid': 'is-valid'}}" value="{{ old('email') }}" placeholder="Correo eléctronico:" required>
     {!! $errors->first('email','<div class="invalid-feedback">:message</div>') !!}
   </div>
+  @endguest
   <div class="form-group">
     <label for="subject">Asunto:</label>
     <input type="text" name="subject" title="asunto" id="subject" class="form-control {{$errors->has('subject') ? 'is-invalid': 'is-valid'}}" value="{{ old('subject') }}" placeholder="Asunto:" required>

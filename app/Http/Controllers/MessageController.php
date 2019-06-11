@@ -62,8 +62,10 @@ class MessageController extends Controller
         //   'created_at' => Carbon::now(),
         //   'updated_at' => Carbon::now(),
         // ]);
-        Message::create($message);
-
+        $message = Message::create($message);
+        if(auth()->check()) {
+            auth()->user()->messages()->save($message);
+        }
         // return response('Contenido de la respuesta', 201)
         //         ->header('X-TOKEN', 'secret')
         //         ->header('X-TOKEN-2', 'secret-2')

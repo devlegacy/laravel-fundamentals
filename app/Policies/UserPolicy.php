@@ -19,6 +19,9 @@ class UserPolicy
         //
     }
 
+    /**
+     * Validate if user is admin
+     */
     public function before($user, $ability)
     {
         if ($user->isAdmin()) {
@@ -46,6 +49,11 @@ class UserPolicy
      * @return boolean
      */
     public function update(User $authUser, User $user) : bool
+    {
+        return $authUser->id === $user->id;
+    }
+
+    public function destroy(User $authUser, User $user) : bool
     {
         return $authUser->id === $user->id;
     }

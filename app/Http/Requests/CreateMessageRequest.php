@@ -24,8 +24,8 @@ class CreateMessageRequest extends FormRequest
     public function rules()
     {
         return [
-              'name' => 'required',
-              'email' => 'required|email',
+              'name' => 'sometimes|required',
+              'email' => 'sometimes|required|email',
               'subject' => 'required',
               'content' => 'required|min:3',
             ];
