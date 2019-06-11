@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         // $users = User::all();
-        $users = User::with(['roles','note','tags'])->get();
+        $users = User::with(['roles','note','tags'])->get(); // eager loading vs lazy eager loading
         return view('users.index', compact('users'));
     }
 

@@ -26,7 +26,7 @@ class MessageController extends Controller
     {
         // $messages = DB::table('messages')->get();
         // $messages = Message::all();
-        $messages = Message::with(['user','note','tags'])->get();
+        $messages = Message::with(['user','note','tags'])->get(); // eager loading vs lazy eager loading
         return view('messages.index', compact('messages'));
     }
 
