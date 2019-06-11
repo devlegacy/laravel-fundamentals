@@ -14,6 +14,7 @@
         <th>Correo eléctronico</th>
         <th>Mensaje</th>
         <th>Notas</th>
+        <th>Tags</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -37,7 +38,10 @@
                 </a>
               </td>
               <td>
-                {{ $message->note->body }}
+                {{ $message->note->body ?? '' }}
+              </td>
+              <td>
+                {{ $message->tags->pluck('name')->implode(', ') }}
               </td>
               <td class="d-flex justify-content-around">
                 <a class="btn btn-warning btn-sm" href="{{route('messages.edit',$message->id)}}"><i class="fas fa-edit"></i> Editar</a>
@@ -50,7 +54,7 @@
             </tr>
         @empty
             <tr>
-              <td colspan="7">
+              <td colspan="8">
                 <h4>Sin mensajes para mostrar</h4>
               </td>
             </tr>

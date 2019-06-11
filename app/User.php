@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use App\Entities\Message;
 use App\Entities\Note;
+use App\Entities\Tag;
 
 class User extends Authenticatable
 {
@@ -84,8 +85,22 @@ class User extends Authenticatable
         return $this->morphOne(Note::class, 'notable');
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     public function setPasswordAttribute($password)
     {
         return $this->attributes['password'] = bcrypt($password);
     }
 }
+
+/**
+$u = App\User::first();
+$t = App\Entities\Tag::first();
+$u->tags()->save($t);
+$u->tags;
+
+$u->tags()->detach(1);
+ */

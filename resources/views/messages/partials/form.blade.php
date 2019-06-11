@@ -1,5 +1,5 @@
 @csrf
-@unless(isset($message) && $message->user_id)
+@if($showFields)
 <div class="form-group">
   <label for="name">Nombre:</label>
   <input type="text" name="name" id="name" class="form-control  {{$errors->has('name') ? 'is-invalid': 'is-valid'}}" value="{{ $message->name ?? old('name') }}" placeholder="Nombre:" title="Nombre" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
@@ -10,7 +10,7 @@
   <input type="email" name="email" title="Correo eléctronico" id="email" class="form-control {{$errors->has('email') ? 'is-invalid': 'is-valid'}}" value="{{ $message->email ?? old('email') }}" placeholder="Correo eléctronico:" required>
   {!! $errors->first('email','<div class="invalid-feedback">:message</div>') !!}
 </div>
-@endunless
+@endif
 <div class="form-group">
   <label for="subject">Asunto:</label>
   <input type="text" name="subject" title="asunto" id="subject" class="form-control {{$errors->has('subject') ? 'is-invalid': 'is-valid'}}" value="{{ $message->subject ?? old('subject') }}" placeholder="Asunto:" required>

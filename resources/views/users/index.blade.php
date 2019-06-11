@@ -14,6 +14,7 @@
         <th>Correo eléctronico</th>
         <th>Rol</th>
         <th>Notas</th>
+        <th>Tags</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -35,6 +36,9 @@
               <td>
                 {{ $user->note->body ?? '' }}
               </td>
+              <td>
+                  {{ $user->tags->pluck('name')->implode(', ') }}
+                </td>
               <td class="d-flex justify-content-around">
                 @can('edit', $user)
                 <a class="btn btn-warning btn-sm" href="{{route('users.edit',$user->id)}}"><i class="fas fa-edit"></i> Editar</a>
@@ -51,7 +55,7 @@
             </tr>
         @empty
             <tr>
-              <td colspan="6">
+              <td colspan="7">
                 <h4>Sin mensajes para mostrar</h4>
               </td>
             </tr>

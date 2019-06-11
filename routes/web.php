@@ -114,6 +114,11 @@
 //     // return (App\Role::with('user')->get());
 //     // return App\User::with('role')->get();
 // });
+// DB::listen(function ($query) {
+//     echo "<pre>{$query->sql} - {$query->time}</pre>";
+// });
+
+
 Route::view('/', 'home')->name("home");
 Route::view('/acerca-de', 'about')->name('about');
 Route::resource('portafolio', 'ProjectController')->names('projects');

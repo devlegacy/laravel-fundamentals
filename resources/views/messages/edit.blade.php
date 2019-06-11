@@ -7,6 +7,9 @@
 
 <form class="needs-validation" action="{{ route('messages.update',$message->id) }}" method="post" novalidate>
   @method('put')
-  @include('messages.partials.form',['btnText' => 'Actualizar'])
+  @include('messages.partials.form',[
+    'btnText' => 'Actualizar',
+    'showFields' => !$message->user_id,
+    ])
 </form>
 @endsection

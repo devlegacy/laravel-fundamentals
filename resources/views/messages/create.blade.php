@@ -10,6 +10,6 @@
 @endif
 
 <form class="needs-validation" action="{{ route('messages.store') }}" method="post" novalidate>
-  @include('messages.partials.form')
+  @include('messages.partials.form', ['showFields' => auth()->guest()])
 </form>
 @endsection
