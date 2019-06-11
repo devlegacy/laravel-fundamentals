@@ -109,44 +109,7 @@
 //         }
 //     );
 // }
-// Route::get('test', function () {
-//     $user = new \App\User();
-//     $user->name = 'Samuel';
-//     $user->email = 'samuel@gmail.com';
-//     $user->password = \Hash::make('secret');
-//     $user->save();
-//     dump($user);
-//     $user = new \App\User();
-//     $user->name = 'Demo';
-//     $user->email = 'demo@gmail.com';
-//     $user->password = \Hash::make('secret');
-//     $user->save();
-//     dump($user);
-//     $user = new \App\User();
-//     $user->name = 'Demo2';
-//     $user->email = 'demo2@gmail.com';
-//     $user->password = \Hash::make('secret');
-//     $user->save();
-//     dump($user);
 
-//     $role = new App\Role();
-//     $role->name = 'administrador';
-//     $role->display_name = 'Administrador';
-//     $role->save();
-//     dump($role);
-
-//     $role = new App\Role();
-//     $role->name = 'moderador';
-//     $role->display_name = 'Moderador';
-//     $role->save();
-//     dump($role);
-
-//     $role = new App\Role();
-//     $role->name = 'estudiante';
-//     $role->display_name = 'Estudiante';
-//     $role->save();
-//     dump($role);
-// });
 // Route::get('roles', function () {
 //     // return (App\Role::with('user')->get());
 //     // return App\User::with('role')->get();
