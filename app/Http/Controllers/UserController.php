@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller
 {
@@ -44,9 +45,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         //
+        $user = User::create($request->validated());
+        $user->roles()->attach($request->roles);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -88,7 +93,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize('update', $user);
-        $user->update($request->all());
+        $user->update($request->only('name', 'email'));
         $user->roles()->sync(request('roles'));//attach(request('roles'));
         return back()->with('info', 'Usuario actualizado');
     }

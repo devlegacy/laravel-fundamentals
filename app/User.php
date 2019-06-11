@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use App\Entities\Message;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -72,7 +73,13 @@ class User extends Authenticatable
         return $this->hasRoles(['administrador']);
     }
 
-    public function messages() {
+    public function messages()
+    {
         return $this->hasMany(Message::class);
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        return $this->attributes['password'] = bcrypt($password);
     }
 }
