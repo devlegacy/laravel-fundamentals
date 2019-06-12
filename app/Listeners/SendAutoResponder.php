@@ -29,6 +29,6 @@ class SendAutoResponder
     public function handle(MessageWasReceived $event)
     {
         // dd($event->message);
-        Mail::to('samuel@devexteam.com')->queue(new MessageReceived($event->message));
+        Mail::to('samuel@devexteam.com', 'Samuel R.')->queue(new MessageReceived($event->message));
     }
 }
