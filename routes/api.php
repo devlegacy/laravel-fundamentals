@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::apiResource('prouducts','Api\ProductController');
+Route::apiResource('products','Api\ProductController');
 Route::group(['prefix'=>'products'], function() {   
     Route::apiResource('/{product}/reviews','Api\ReviewController');
 });

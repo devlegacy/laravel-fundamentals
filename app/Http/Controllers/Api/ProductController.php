@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Entities\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Product\ProductResource;
 
 class ProductController extends Controller
 {
@@ -15,17 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Product::all();
     }
 
     /**
@@ -47,7 +38,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return new ProductResource($product);
     }
 
     /**
