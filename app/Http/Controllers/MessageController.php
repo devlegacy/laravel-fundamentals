@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Entities\Message;
+use App\Events\MessageWasReceived;
 
 class MessageController extends Controller
 {
@@ -53,7 +54,6 @@ class MessageController extends Controller
         /**
          * Siempre usar queue como recomendación
          */
-        Mail::to('samuel@devexteam.com')->queue(new MessageReceived($message));
 
         // DB::table('messages')->insert([
         //   'name' => request('name'),
@@ -67,7 +67,8 @@ class MessageController extends Controller
         if (auth()->check()) {
             auth()->user()->messages()->save($message);
         }
-
+        event(new MessageWasReceived($message));
+        // Mail::to('samuel@devexteam.com')->queue(new MessageReceived($message));
         // auth()->user()->messages()->create();
 
         // $message->user_id = auth()->id()
