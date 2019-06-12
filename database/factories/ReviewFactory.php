@@ -3,10 +3,14 @@
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
 use App\Entities\Review;
+use App\Entities\Product;
 use Faker\Generator as Faker;
 
 $factory->define(Review::class, function (Faker $faker) {
-    return [
-        //
+    return [ 
+        'product_id' => function() { return Product::all()->random() ;},
+        'customer' => $faker->name,
+        'review' => $faker->paragraph,
+        'star' => $faker->numberBetween(0,5),
     ];
 });
