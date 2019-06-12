@@ -15,21 +15,21 @@ class UsersTableSeeder extends Seeder
         $user = new User();
         $user->name = 'Samuel';
         $user->email = 'samuel@gmail.com';
-        $user->password =bcrypt('password');
+        $user->password ='password';
         $user->save();
         $user->roles()->attach([1, 2]);
 
         $user = new User();
         $user->name = 'Demo';
         $user->email = 'demo@gmail.com';
-        $user->password =bcrypt('password');
+        $user->password ='password';
         $user->save();
         $user->roles()->attach([2]);
 
         $user = new User();
         $user->name = 'Demo2';
         $user->email = 'demo2@gmail.com';
-        $user->password =bcrypt('password');
+        $user->password ='password';
         $user->save();
         $user->roles()->attach([3]);
     }
