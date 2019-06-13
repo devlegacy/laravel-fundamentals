@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4540ec8d-b8ac-4eea-bfd0-acab74b98545",
+		"_postman_id": "0fefa70b-41ee-4aa1-b39b-e417f9ed8c3e",
 		"name": "api",
 		"description": "Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -14,8 +14,40 @@
 			"name": "Api",
 			"item": [
 				{
-					"name": "Product",
-					"item": [],
+					"name": "Products",
+					"item": [
+						{
+							"name": "Products all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}products",
+									"host": [
+										"{{api}}products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Products show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}products/4",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
 					"_postman_isSubFolder": true
 				},
 				{

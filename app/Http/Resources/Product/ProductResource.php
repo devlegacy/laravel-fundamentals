@@ -22,7 +22,7 @@ class ProductResource extends JsonResource
               ? $this->stock
                : 'Out of stock',
             'discount' => $this->discount,
-            'totalPrice' => (1 - bcdiv($this->discount, 100, 2))* $this->price,
+            'totalPrice' => bcmul((1 - bcdiv($this->discount, 100, 2)), $this->price, 2),
             // 17/100 = .17
             // 1 - .17 = .83
             // .83 * 100

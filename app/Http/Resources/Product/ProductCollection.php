@@ -16,7 +16,7 @@ class ProductCollection extends Resource
     {
         return [
           'name' => $this->name,
-          'totalPrice' => (1 - bcdiv($this->discount, 100, 2))* $this->price,
+          'totalPrice' => bcmul((1 - bcdiv($this->discount, 100, 2)), $this->price, 2),
           'rating' => $this->reviews->count() > 0
               ? (float) bcdiv($this->reviews->sum('star'), $this->reviews->count(), 2)
               : 'No rating yet',
