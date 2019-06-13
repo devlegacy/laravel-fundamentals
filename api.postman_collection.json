@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "4540ec8d-b8ac-4eea-bfd0-acab74b98545",
+		"name": "api",
+		"description": "Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OAuth",
+			"item": []
+		},
+		{
+			"name": "Api",
+			"item": [
+				{
+					"name": "Product",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Reviews",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
