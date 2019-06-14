@@ -13,3 +13,5 @@ class ProductNotBelongToUser extends Exception
         ];
     }
 }
+
+// php artisan make:exception ProductNotBelongToUser
