@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4f096a82-e70a-4fe8-9a96-8ad8722074b6",
+		"_postman_id": "4082aff1-6f76-4409-a7fc-1265bc51f6bb",
 		"name": "api",
 		"description": "Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -27,7 +27,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"grant_type\" : \"password\",\n\t\"client_id\" : \"2\",\n\t\"client_secret\" : \"8hJeEev0mk9G3CvqNI2iUKfqheedMISmtJZ0E9in\",\n\t\"username\" : \"samuel@gmail.com\",\n\t\"password\" : \"password\"\n}"
+							"raw": "{\n\t\"grant_type\" : \"password\",\n\t\"client_id\" : \"2\",\n\t\"client_secret\" : \"2AlZWH2w70K5RYsybmtRqZ87p8rC7kWCZawaidjX\",\n\t\"username\" : \"samuel@gmail.com\",\n\t\"password\" : \"password\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}oauth/token",
@@ -90,11 +90,34 @@
 							"name": "All",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{api}}products",
 									"host": [
 										"{{api}}products"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "J",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -104,7 +127,18 @@
 							"name": "Show",
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{api}}products/4",
 									"host": [
@@ -140,12 +174,88 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"Iphone 8\",\n\t\"description\": \"Awesome, the best ever phone with wireless chargin\",\n\t\"price\": 80,\n\t\"stock\": 10,\n\t\"discount\": 50\n}"
+									"raw": "{\n\t\"name\": \"Iphone X\",\n\t\"description\": \"Awesome, the best ever phone with wireless chargin\",\n\t\"price\": 80,\n\t\"stock\": 10,\n\t\"discount\": 50\n}"
 								},
 								"url": {
 									"raw": "{{api}}products",
 									"host": [
 										"{{api}}products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Iphone XX updated\",\n\t\"description\": \"Awesome, the best ever phone with wireless chargin....... updated\",\n\t\"price\": 80,\n\t\"stock\": 10,\n\t\"discount\": 50\n}"
+								},
+								"url": {
+									"raw": "{{api}}products/47",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"47"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{api}}products/1",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"1"
 									]
 								}
 							},
@@ -170,6 +280,65 @@
 									"path": [
 										"4",
 										"reviews"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Errors",
+					"item": [
+						{
+							"name": "Not found HTTP",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{api}}productsssa",
+									"host": [
+										"{{api}}productsssa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Model not found",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{api}}products/40000000000",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"40000000000"
 									]
 								}
 							},
