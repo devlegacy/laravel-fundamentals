@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index','show']);
+        $this->middleware('auth:api');
     }
     /**
      * Display a listing of the resource.
@@ -41,6 +41,7 @@ class ProductController extends Controller
         $product->price = request('price');
         $product->discount = request('discount');
         $product->save();
+
         return response([
           'data' => new ProductResource($product),
         ], Response::HTTP_CREATED);
@@ -58,17 +59,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Entities\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -77,7 +67,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request['detail'] = $request->description;
+        unset($request['description']);
+        $product->update($request->all());
+
+        return response([
+          'data' => new ProductResource($product),
+        ], Response::HTTP_CREATED);
     }
 
     /**
