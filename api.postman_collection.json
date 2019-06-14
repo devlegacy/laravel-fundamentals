@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0fefa70b-41ee-4aa1-b39b-e417f9ed8c3e",
+		"_postman_id": "4f096a82-e70a-4fe8-9a96-8ad8722074b6",
 		"name": "api",
 		"description": "Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -8,7 +8,77 @@
 	"item": [
 		{
 			"name": "OAuth",
-			"item": []
+			"item": [
+				{
+					"name": "Get token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"grant_type\" : \"password\",\n\t\"client_id\" : \"2\",\n\t\"client_secret\" : \"8hJeEev0mk9G3CvqNI2iUKfqheedMISmtJZ0E9in\",\n\t\"username\" : \"samuel@gmail.com\",\n\t\"password\" : \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}oauth/token",
+							"host": [
+								"{{url}}oauth"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api}}user",
+							"host": [
+								"{{api}}user"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "J",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Api",
@@ -17,7 +87,7 @@
 					"name": "Products",
 					"item": [
 						{
-							"name": "Products all",
+							"name": "All",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -31,7 +101,7 @@
 							"response": []
 						},
 						{
-							"name": "Products show",
+							"name": "Show",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -46,13 +116,66 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Iphone 8\",\n\t\"description\": \"Awesome, the best ever phone with wireless chargin\",\n\t\"price\": 80,\n\t\"stock\": 10,\n\t\"discount\": 50\n}"
+								},
+								"url": {
+									"raw": "{{api}}products",
+									"host": [
+										"{{api}}products"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
 				},
 				{
 					"name": "Reviews",
-					"item": [],
+					"item": [
+						{
+							"name": "All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api}}products/4/reviews",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"4",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						}
+					],
 					"_postman_isSubFolder": true
 				}
 			]
