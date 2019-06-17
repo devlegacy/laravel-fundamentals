@@ -11,6 +11,9 @@ class Message extends Model
 {
     //
     protected $fillable = ['name','subject','email','content'];
+    // protected $connection = '';
+    // protected $table = '';
+    // protected $guarded = [];
 
     public function user()
     {

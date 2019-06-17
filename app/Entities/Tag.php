@@ -9,6 +9,9 @@ use App\User;
 class Tag extends Model
 {
     protected $fillable = ['name'];
+    // protected $connection = '';
+    // protected $table = '';
+    // protected $guarded = [];
 
     public function messages()
     {

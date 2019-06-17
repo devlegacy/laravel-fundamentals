@@ -8,6 +8,9 @@ use App\Entities\Message;
 class Note extends Model
 {
     protected $fillable = ['body'];
+    // protected $connection = '';
+    // protected $table = '';
+    // protected $guarded = [];
 
     public function notable()
     {
