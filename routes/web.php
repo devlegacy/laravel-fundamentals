@@ -131,4 +131,4 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 
 // wbtz
-Route::get('museos', 'MuseumController@index')->name('museums.index');
+Route::resource('museos', 'MuseumController')->names('museums');
