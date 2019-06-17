@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(MuseumsTableSeeder::class);
         factory(App\User::class, 20)->create();
         factory(App\Entities\Message::class, 40)->create();
 

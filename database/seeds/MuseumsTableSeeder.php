@@ -21,6 +21,7 @@ class MuseumsTableSeeder extends Seeder
         $museum->phone ='+1 212-535-7710';
         $museum->hours ='Monday-Sunday 10AM–5:30PM';
         $museum->rating = null;
+        $museum->user_id = null;
         $museum->save();
 
         $museum = new Museum();
@@ -32,6 +33,7 @@ class MuseumsTableSeeder extends Seeder
         $museum->phone ='+33 1 40 20 50 50';
         $museum->hours ='Wednesday 9AM - 10PM';
         $museum->rating = 4.80;
+        $museum->user_id = null;
         $museum->save();
     }
 }

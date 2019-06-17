@@ -23,7 +23,7 @@ class CreateMuseumsTable extends Migration
             $table->string('phone');
             $table->string('hours');
             $table->decimal('rating')->nullable();
-
+            $table->integer('user_id')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

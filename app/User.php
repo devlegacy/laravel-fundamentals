@@ -10,6 +10,8 @@ use App\Role;
 use App\Entities\Message;
 use App\Entities\Note;
 use App\Entities\Tag;
+use App\Entities\ReviewMuseum;
+use App\Entities\Museum;
 
 class User extends Authenticatable
 {
@@ -91,6 +93,16 @@ class User extends Authenticatable
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
+    public function reviewMuseums()
+    {
+        return $this->hasMany(ReviewMuseum::class);
+    }
+
+    public function museums()
+    {
+        return $this->hasMany(Museum::class);
+    }
+
     public function setPasswordAttribute($password)
     {
         return $this->attributes['password'] = bcrypt($password);
@@ -104,4 +116,10 @@ $u->tags()->save($t);
 $u->tags;
 
 $u->tags()->detach(1);
- */
+
+Museums
+$u = App\User::first();
+$m = App\Entities\Museum::first();
+$u->museums()->save($m);
+
+*/

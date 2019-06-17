@@ -12,7 +12,7 @@
   <div class="container">
       <div class="row">
           @foreach($museums as $museum)
-              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                   <div class="card b-museum">
                       @if( $museum->thumbnail )
                           <figure class="b-museum__thumbnail">
@@ -43,6 +43,9 @@
                           <div class="b-museum__ranking">
                               <strong>Rating: </strong> {{ $museum->rating }}
                           </div>
+                          @if ($museum->user)
+                              {{$museum->user->name}}
+                          @endif
                       </div>
                   </div>
               </div>
