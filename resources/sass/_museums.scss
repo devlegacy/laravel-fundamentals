@@ -1,0 +1,43 @@
+.b-museum {
+  border: 1px solid $laravel-border-color;
+  margin-bottom: 20px;
+
+  background-color: white;
+  &-information {
+    padding: 20px;
+  }
+
+  &__name {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $laravel-border-color;
+    margin: 0 0 15px 0;
+
+    font-size: 18px;
+    line-height: 1.5em;
+
+    &--detail {
+      font-size: 28px;
+    }
+  }
+
+  &__description {
+    margin-bottom: 10px;
+  }
+}
+
+.b-museum-reviews {
+  padding: 0 20px 20px 20px;
+
+  &__title {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $laravel-border-color;
+
+    font-size: 28px;
+  }
+}
+
+.b-review {
+  &__text {
+    margin-top: 10px;
+  }
+}
