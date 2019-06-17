@@ -128,3 +128,7 @@ Route::resource('usuario', 'UserController')->names('users');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
+
+
+// wbtz
+Route::get('museos', 'MuseumController@index')->name('museums.index');
