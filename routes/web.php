@@ -132,3 +132,5 @@ Route::get('logout', 'Auth\LoginController@logout');
 
 // wbtz
 Route::resource('museos', 'MuseumController')->names('museums');
+// Test
+Route::get('xhr/upload/xml', 'Xhr\UploadController@xml')->name('uploads.xml');
