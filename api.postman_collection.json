@@ -268,18 +268,134 @@
 					"name": "Reviews",
 					"item": [
 						{
-							"name": "All",
+							"name": "All by product",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api}}products/4/reviews",
+									"raw": "{{api}}products/38/reviews",
 									"host": [
 										"{{api}}products"
 									],
 									"path": [
-										"4",
+										"38",
 										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{auth}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"customer\": \"Samuel\",\n\t\"star\": 14,\n\t\"review\": \"Nice\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}products/38/reviews",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"38",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{auth}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"customer\": \"Samuel Update\",\n\t\"star\": 4,\n\t\"review\": \"Nice\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}products/38/reviews/301",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"38",
+										"reviews",
+										"301"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{auth}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"customer\": \"Samuel Update\",\n\t\"star\": 4,\n\t\"review\": \"Nice\"\n}"
+								},
+								"url": {
+									"raw": "{{api}}products/38/reviews/129",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"38",
+										"reviews",
+										"129"
 									]
 								}
 							},
@@ -339,6 +455,49 @@
 									],
 									"path": [
 										"40000000000"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Not Belong to User",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{auth}}",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Iphone XX updated\",\n\t\"description\": \"Awesome, the best ever phone with wireless chargin....... updated\",\n\t\"price\": 80,\n\t\"stock\": 10,\n\t\"discount\": 50\n}"
+								},
+								"url": {
+									"raw": "{{api}}products/20",
+									"host": [
+										"{{api}}products"
+									],
+									"path": [
+										"20"
 									]
 								}
 							},
