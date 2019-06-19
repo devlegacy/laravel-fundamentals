@@ -52,5 +52,8 @@
           @endforeach
 
       </div>
+      <div class="d-flex justify-content-center">
+        {{$museums->links()}}
+      </div>
   </div>
 @endsection

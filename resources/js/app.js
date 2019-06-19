@@ -3,8 +3,11 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+(async () => {
+  await import(/* webpackPrefetch: true, webpackChunkName: "js/vendor/PNotify" */ 'pnotify/dist/es/PNotify.js');
+  await import(/* webpackPreload: true, webpackChunkName: "js/vendor/bootstrap" */ './bootstrap');
+})();
 
-require('./bootstrap');
 
 window.Vue = require('vue');
 
@@ -22,3 +25,11 @@ window.addEventListener('load', function () {
     }, false);
   });
 }, false);
+
+if (window.location.pathname.includes('museos')) {
+  (async () => {
+    const PNotify = await import(/* webpackPreload: true, webpackChunkName: "js/vendor/PNotify" */ 'pnotify/dist/es/PNotify.js').then(({ default: module }) => module);
+    PNotify.alert('Welcome to museos view');
+  })();
+}
+
