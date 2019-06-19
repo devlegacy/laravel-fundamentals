@@ -27,7 +27,10 @@ class MessageController extends Controller
     {
         // $messages = DB::table('messages')->get();
         // $messages = Message::all();
-        $messages = Message::with(['user','note','tags'])->get(); // eager loading vs lazy eager loading
+        // $messages = Message::with(['user','note','tags'])->get(); // eager loading vs lazy eager loading
+        $messages = Message::with(['user','note','tags'])
+                            ->orderBy('created_at', request('sorted') ?? 'asc')
+                            ->paginate(10); // eager loading vs lazy eager loading
         return view('messages.index', compact('messages'));
     }
 

@@ -15,6 +15,7 @@ $factory->define(Message::class, function (Faker $faker) {
           'user_id' => function () {
               return User::all()->random();
           },
+          'created_at' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),
         ];
     }
     return [
@@ -22,5 +23,6 @@ $factory->define(Message::class, function (Faker $faker) {
         'email' => $faker->email,
         'subject' => $faker->sentence($faker->numberBetween(3, 5)),
         'content' => $faker->text,
+        'created_at' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),
     ];
 });

@@ -4,6 +4,7 @@
 
 @section('content')
 <h1>Todos los mensajes</h1>
+@include('messages.partials.pagination')
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover ">
     <thead class="thead-dark">
@@ -61,6 +62,7 @@
         @endforelse
     </tbody>
   </table>
-</div>
 
+</div>
+@include('messages.partials.pagination')
 @endsection
