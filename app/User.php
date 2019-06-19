@@ -12,6 +12,7 @@ use App\Entities\Note;
 use App\Entities\Tag;
 use App\Entities\ReviewMuseum;
 use App\Entities\Museum;
+use App\Presenters\UserPresenter;
 
 class User extends Authenticatable
 {
@@ -106,6 +107,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         return $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function present()
+    {
+      return new UserPresenter($this);
     }
 }
 

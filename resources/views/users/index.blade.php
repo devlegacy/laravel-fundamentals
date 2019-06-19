@@ -23,22 +23,11 @@
         @forelse ($users as $user)
             <tr>
               <td>{{$user->id}}</td>
-              <td>
-                <a href="{{route('users.show',$user->id)}}">{{$user->name}}</a>
-              </td>
+              <td>{{$user->present()->link()}}</td>
               <td>{{$user->email}}</td>
-              <td>
-              {{ $user->roles->pluck('display_name')->implode(', ') }}
-                {{-- @foreach ($user->roles as $role)
-                    {{$role->display_name}}
-                @endforeach --}}
-              </td>
-              <td>
-                {{ $user->note->body ?? '' }}
-              </td>
-              <td>
-                  {{ $user->tags->pluck('name')->implode(', ') }}
-                </td>
+              <td>{{$user->present()->roles()}}</td>
+              <td>{{$user->present()->notes()}}</td>
+              <td>{{$user->present()->tags()}}</td>
               <td class="d-flex justify-content-around">
                 @can('edit', $user)
                 <a class="btn btn-warning btn-sm" href="{{route('users.edit',$user->id)}}"><i class="fas fa-edit"></i> Editar</a>

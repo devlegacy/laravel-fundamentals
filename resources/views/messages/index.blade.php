@@ -23,27 +23,12 @@
         @forelse ($messages as $message)
             <tr>
               <td>{{$message->id}}</td>
-              <td>
-                @if ($message->user_id)
-                  <a href="{{route('users.show',$message->user_id)}}">{{$message->user->name}}</a>
-                @else
-                  {{$message->name}}
-                @endif
-              </td>
-
+              <td>{{$message->present()->getUserName()}}</td>
               <td>{{$message->subject}}</td>
-              <td>{{$message->user_id ? $message->user->email : $message->email}}</td>
-              <td>
-                <a href="{{route('messages.show',$message->id)}}">
-                  {{$message->content}}
-                </a>
-              </td>
-              <td>
-                {{ $message->note->body ?? '' }}
-              </td>
-              <td>
-                {{ $message->tags->pluck('name')->implode(', ') }}
-              </td>
+              <td>{{$message->present()->getUserEmail()}}</td>
+              <td>{{$message->present()->link()}}</td>
+              <td>{{$message->present()->getNotes()}}</td>
+              <td>{{$message->present()->getTags()}}</td>
               <td class="d-flex justify-content-around">
                 <a class="btn btn-warning btn-sm" href="{{route('messages.edit',$message->id)}}"><i class="fas fa-edit"></i> Editar</a>
                 <form action="{{route('messages.destroy',$message->id)}}" method="POST">

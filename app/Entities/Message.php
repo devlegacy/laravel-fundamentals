@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Entities\Note;
 use App\Entities\Tag;
+use App\Presenters\MessagePresenter;
 
 class Message extends Model
 {
@@ -28,6 +29,11 @@ class Message extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function present()
+    {
+        return new MessagePresenter($this);
     }
 }
 
