@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use App\Repositories\MessagesInterface;
+use App\Repositories\CacheMessages;
+use App\Repositories\Messages;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(MessagesInterface::class, CacheMessages::class);
+        // app()->bind(MessagesInterface::class, Messages::class);
     }
 
     /**
