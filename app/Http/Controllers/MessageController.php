@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Entities\Message;
 use App\Events\MessageWasReceived;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class MessageController extends Controller
 {
@@ -39,7 +40,16 @@ class MessageController extends Controller
         //     Cache::put($cacheKey, $messages, Carbon::now()->addMinutes(10));
         // }
         // Cache::remember(%cacheKey, Carbon::now()->addMinutes(10), function() {
-        $messages = Cache::rememberForever($cacheKey, function () {
+        // try {
+        //     $redis=Redis::connect('127.0.0.1', 3306);
+        //     Redis::set('name', 'Taylor');
+        //     return response('redis working');
+        // } catch (\Predis\Connection\ConnectionException $e) {
+        //     dump($e);
+        //     return response('error connection redis');
+        // }
+
+        $messages = Cache::tags('messages')->rememberForever($cacheKey, function () use ($cacheKey) {
             return Message::with(['user','note','tags'])
                             ->orderBy('created_at', request('sorted') ?? 'desc')
                             ->paginate(10); // eager loading vs lazy eager loading
@@ -113,7 +123,7 @@ class MessageController extends Controller
     public function show(int $id)
     {
         // $message = DB::table('messages')->where('id', $id)->first();
-        $message = Cache::rememberForever("messsage.$id", function () use ($id) {
+        $message = Cache::tags('messages')->rememberForever("messsage.$id", function () use ($id) {
             return Message::findOrFail($id);
         });
         return view('messages.show', compact('message'));
@@ -129,7 +139,7 @@ class MessageController extends Controller
     {
         // $message = DB::table('messages')->where('id', $id)->first();
         // $message = Message::findOrFail($id);
-        $message = Cache::rememberForever("messsage.$id", function () use ($id) {
+        $message = Cache::tags('messages')->rememberForever("messsage.$id", function () use ($id) {
             return Message::findOrFail($id);
         });
         return view('messages.edit', compact('message'));
@@ -152,7 +162,7 @@ class MessageController extends Controller
         //   'updated_at' => Carbon::now(),
         // ]);
         Message::findOrFail($id)->update(request()->all());
-        Cache::flush();
+        Cache::tags('messages')->flush();
         return redirect()->route('messages.index');
     }
 
@@ -166,7 +176,7 @@ class MessageController extends Controller
     {
         // DB::table('messages')->where('id', $id)->delete();
         Message::findOrFail($id)->delete();
-        Cache::flush();
+        Cache::tags('messages')->flush();
         return redirect()->route('messages.index');
     }
 }
