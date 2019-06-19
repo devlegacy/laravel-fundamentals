@@ -31,7 +31,7 @@ class SendNotificationToOwner
 
         Mail::send('emails.message-received', ['msg' => $message], function ($m) use ($message) {
             $m->from('samuel@devexteam.com', 'Samuel R.')
-            ->to($message->email, $message->name)
+            ->to(auth()->check() ? auth()->user()->email : $message->email, $message->name)
             ->subject('Tú mensaje fue recibido.');
         });
     }
