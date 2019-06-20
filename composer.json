@@ -66,7 +66,8 @@
             "@php artisan key:generate --ansi"
         ],
         "clear:cache": "rm -rf cache && rm -f ./.php_cs.cache && php artisan cache:clear && php artisan route:cache && php artisan config:cache && php artisan view:clear",
-        "uptodate": "composer update && ncu -u && npm i && composer dumpautoload",
+        "uptodate": "composer update && composer dumpautoload && ncu -u && npm i",
+        "uptodate:prod": "composer update --no-dev && composer install --no-interaction --prefer-dist --optimize-autoloader && composer dumpautoload && ncu -u && npm i --only=prod",
         "migrate": "php artisan migrate:fresh --seed",
         "migrate:passport": "php artisan migrate:fresh --seed && php artisan passport:install"
     }

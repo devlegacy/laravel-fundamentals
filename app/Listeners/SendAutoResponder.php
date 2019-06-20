@@ -28,7 +28,12 @@ class SendAutoResponder
      */
     public function handle(MessageWasReceived $event)
     {
+        $message = $event->message;
         // dd($event->message);
-        Mail::to('samuel@devexteam.com', 'Samuel R.')->queue(new MessageReceived($event->message));
+        if (auth()->check()) {
+            $message->name = auth()->user()->name;
+            $message->email = auth()->user()->email;
+        }
+        Mail::to('samuel@devexteam.com', 'Samuel R.')->queue(new MessageReceived($message));
     }
 }
