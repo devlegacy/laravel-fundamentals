@@ -7,10 +7,10 @@ use App\Entities\Review;
 
 class Product extends Model
 {
-    protected $fillable = ['name','detail','stock','price','discount'];
+    // protected $fillable = ['name','detail','stock','price','discount'];
     // protected $connection = '';
     // protected $table = '';
-    // protected $guarded = [];
+    protected $guarded = [];
 
     public function reviews()
     {
