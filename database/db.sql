@@ -1,3 +1,7 @@
+ ADD in docs
+
+ mysqldump -u root -p laravel_fundamentals > /var/www/html/laravel-fundamentals/database/backup.sql
+
 CREATE DATABASE IF NOT EXISTS laravel_fundamentals CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- TODO: DROP TABLE IF exists reviewsables;
@@ -120,10 +124,10 @@ CREATE TABLE IF NOT EXISTS detail_sales (
   id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   price DECIMAL(10,2) UNSIGNED NOT NULL DEFAULT 0.00,
   cost DECIMAL(10,2) UNSIGNED NOT NULL DEFAULT 0.00,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   sale_id BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
   product_id MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0,
   amount MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   CONSTRAINT pk_detail_sales_id PRIMARY KEY(id),
@@ -133,4 +137,163 @@ CREATE TABLE IF NOT EXISTS detail_sales (
 ENGINE = InnoDB
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci
-COMMENT ''; -- 55013
+COMMENT '';
+
+-- SELECT
+
+-- Performance issue
+SELECT * FROM clients;
+
+-- Best practice
+
+SELECT id FROM clients;
+-- Extends SELECT with WHERE
+SELECT id FROM clients WHERE id > 10;
+
+SELECT name, price FROM products WHERE price > 0;
+
+SELECT name, price
+FROM products
+WHERE price > 0 AND status > 0;
+
+SELECT name, price, status, provider_id
+FROM products
+WHERE price > 0 AND (status =0 OR (status=1 AND provider_id=97));
+
+SELECT date, client_id, total
+FROM sales
+WHERE date > '2018-01-03' AND date < '2018-01-10' AND client_id != 1 AND total > 1000;
+
+-- ORDER BY
+SELECT * FROM clients ORDER BY name ASC;
+SELECT * FROM clients ORDER BY name DESC;
+
+SELECT * FROM products ORDER BY STATUS ASC, price DESC;
+
+SELECT * FROM datil_sales AS ds, products AS p
+WHERE ds.product_id = p.id
+ORDER BY p.provider_id DESC
+
+-- FUNCTION
+-- SUM
+SELECT SUM(total) AS total FROM sales;
+-- SUM, MONTH, YEAR
+SELECT SUM(total) AS total FROM sales WHERE MONTH(date) = 1 AND YEAR(date) = 2018;
+-- COUNT, MONTH, YEAR
+SELECT COUNT(id) AS count from sales WHERE MONTH(date) = 1 AND YEAR(date) = 2018;
+SELECT MAX(total) AS 'Venta máxima' from sales WHERE MONTH(date) = 1 AND YEAR(date) = 2018;
+
+-- MIN
+SELECT MIN(total) AS 'Venta minima' from sales WHERE MONTH(date) = 1 AND YEAR(date) = 2018;
+-- AVG - Promedio
+SELECT AVG(total) AS 'Venta minima' from sales WHERE MONTH(date) = 1 AND YEAR(date) = 2018;
+-- GROUP BY
+-- SELECT @@sql_mode;
+-- SELECT @@global.time_zone;
+-- SELECT @@lc_time_names;
+-- SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY,',''));
+-- SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY,',''));
+-- SET @@global.time_zone = '+00:00';
+
+SELECT date, total FROM sales GROUP BY date;
+SELECT date, SUM(total) as total FROM sales GROUP BY date;
+SELECT  YEAR(date) as year,
+        MONTH(date) as month,
+        DAY(date) as day,
+        SUM(total) as total
+from sales
+GROUP BY year, month;
+SELECT  YEAR(date) as year,
+        MONTH(date) as month,
+        DAY(date) as day,
+        MAX(total) as maximo
+from sales
+GROUP BY year, month;
+SELECT  YEAR(date) as year,
+        MONTH(date) as month,
+        -- DAY(date) as day,
+        MIN(total) as minimo
+from sales
+GROUP BY year, month;
+
+SELECT  YEAR(date) as year,
+        MONTH(date) as month,
+        -- DAY(date) as day,
+        AVG(total) as promedio
+from sales
+GROUP BY year, month;
+
+SELECT  YEAR(date) as year,
+        MONTH(date) as month,
+        -- DAY(date) as day,
+        sum(total) as total
+from sales
+WHERE client_id = 1
+GROUP BY year, month;
+
+@SET lc_time_names = 'es_ES';
+SELECT  YEAR(date) as year,
+        MONTH(date) as month,
+        MONTHNAME(date) as monthname,
+        -- DAY(date) as day,
+        sum(total) as total,
+        MAX(total) as maximo,
+        MIN(total) as minimo,
+        AVG(total) as promedio,
+        COUNT(id) as operaciones
+from sales
+WHERE client_id = 1
+GROUP BY year, month;
+
+-- JOIN
+-- Implicit JOIN
+-- Desventaja si falta un dato, el registro no se muestra completo
+-- Siempre se recomienda los JOINS
+SELECT s.date, s.invoice, s.client_id, c.name, s.total
+FROM sales AS s, clients AS c
+WHERE s.client_id = c.id;
+
+SELECT
+        s.date AS Fecha,
+        s.invoice AS Factura,
+        s.client_id AS Cliente,
+        c.name AS `Nombre de cliente`,
+        s.total AS total
+FROM sales AS s, clients AS c
+WHERE s.client_id = c.id
+LIMIT 10;
+
+SELECT  s.client_id AS Cliente,
+        c.name AS `Nombre de cliente`,
+        s.invoice AS Factura,
+        s.date AS fecha,
+        ds.product_id,
+        p.name AS `Nombre de producto`,
+        p.color AS color,
+        ds.amount AS cantidad,
+        ds.price AS precio,
+        pr.name as `Nombre de proveedor`
+FROM clients AS c, sales AS s, detail_sales as ds, products AS p, providers AS pr
+WHERE     s.client_id   = c.id
+      AND ds.product_id = p.id
+      AND ds.sale_id   = s.id
+      AND p.provider_id = pr.id;
+
+SHOW VARIABLES LIKE "secure_file_priv";
+SELECT  s.client_id AS Cliente,
+        c.name AS `Nombre de cliente`,
+        s.invoice AS Factura,
+        s.date AS fecha,
+        ds.product_id,
+        p.name AS `Nombre de producto`,
+        p.color AS color,
+        ds.amount AS cantidad,
+        ds.price AS precio,
+        pr.name as `Nombre de proveedor`
+FROM clients AS c, sales AS s, detail_sales as ds, products AS p, providers AS pr
+WHERE     s.client_id   = c.id
+      AND ds.product_id = p.id
+      AND ds.sale_id   = s.id
+      AND p.provider_id = pr.id
+INTO OUTFILE '/var/lib/mysql-files/my-select.csv' FIELDS TERMINATED BY ','LINES TERMINATED BY '\n';
+sudo cat /var/lib/mysql-files/my-select.csv
