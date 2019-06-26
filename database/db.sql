@@ -139,6 +139,52 @@ CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci
 COMMENT '';
 
+
+
+
+DROP TABLE IF EXISTS students;
+
+CREATE TABLE IF NOT EXISTS students(
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(60) NOT NULL DEFAULT '',
+
+  CONSTRAINT pk_students_id PRIMARY KEY (id)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci
+COMMENT '';
+
+INSERT INTO students VALUES
+(1,'Pedro'),
+(2,'Marcos'),
+(3,'Pablo'),
+(4,'Mario');
+
+
+
+
+
+DROP TABLE IF EXISTS courses;
+
+CREATE TABLE IF NOT EXISTS courses (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  subject_id INT UNSIGNED NOT NULL,
+  student_id INT UNSIGNED NOT NULL,
+  score TINYINT UNSIGNED NOT NULL DEFAULT 0,
+
+  CONSTRAINT pk_courses_id PRIMARY KEY (id)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci
+COMMENT '';
+
+INSERT INTO courses VALUES
+(1,1,1,5),
+(2,1,2,3),
+(3,1,6,7);
+
 -- SELECT
 
 -- Performance issue
@@ -297,3 +343,180 @@ WHERE     s.client_id   = c.id
       AND p.provider_id = pr.id
 INTO OUTFILE '/var/lib/mysql-files/my-select.csv' FIELDS TERMINATED BY ','LINES TERMINATED BY '\n';
 sudo cat /var/lib/mysql-files/my-select.csv
+
+-- not in / in
+-- Clientes que me han comprado
+
+SELECT DISTINCT(client_id) FROM sales;
+
+SELECT id AS 'No. cliente', name as 'Nombre cliente' FROM clients WHERE id NOT IN (SELECT DISTINCT(client_id) FROM sales);
+
+SELECT id AS 'No. cliente', name as 'Nombre cliente' FROM clients WHERE id NOT IN (SELECT DISTINCT(client_id) FROM sales WHERE date >= '2018-02-01' AND date <= '2018-03-01');
+
+SELECT id AS 'No. cliente', name as 'Nombre cliente' FROM clients WHERE id NOT IN (SELECT DISTINCT(client_id) FROM sales WHERE date >= '2018-02-01' AND date <= '2018-03-01') ORDER BY id ASC;
+
+SELECT id, name FROM products WHERE status IN (0,1);
+
+-- Productos no vendidos
+SELECT id, name FROM products WHERE id NOT IN (SELECT product_id FROM detail_sales);
+
+SELECT id, name FROM products WHERE id NOT IN (SELECT DISTINCT product_id FROM detail_sales);
+
+SELECT id, name FROM products WHERE id NOT IN (SELECT DISTINCT product_id FROM detail_sales, sales WHERE detail_sales.sale_id = sales.id AND sales.date > '2018-01-01');
+
+-- Between
+SELECT date, client_id, total FROM sales WHERE date BETWEEN '2018-01-01' AND '2018-01-04';
+
+SELECT date, client_id, total FROM sales WHERE date BETWEEN '2018-01-01' AND '2018-01-04';
+SELECT date, client_id, total FROM sales WHERE date BETWEEN 2 AND 100;
+
+-- LIKE for strings
+
+SELECT id, detail, color FROM products
+WHERE detail LIKE 'p';
+
+-- LIKE meta caracteres
+
+SELECT id, detail, color FROM products
+WHERE detail LIKE 'ad%';
+
+SELECT id, name, color FROM products
+WHERE name LIKE 'ad%';
+
+SELECT id, name, color FROM products
+WHERE name LIKE '%ad';
+
+SELECT id, name, color FROM products
+WHERE name LIKE '%ad%';
+
+SELECT id, name, color FROM products
+WHERE name LIKE '_d%';
+
+SELECT id, name, color FROM products
+WHERE CONCAT(name, color) LIKE '%ad%';
+
+-- JOIN = INNER JOIN
+
+SELECT s.date, s.invoice, s.client_id, c.name, ds.product_id, p.name, p.provider_id, pr.name, ds.amount, ds.price, (ds.amount*ds.price) AS partial
+FROM sales AS s
+JOIN detail_sales AS ds ON ds.sale_id = s.id
+JOIN products AS p ON p.id = ds.product_id
+JOIN providers AS pr ON pr.id = p.provider_id
+JOIN clients AS c ON c.id = s.client_id;
+
+-- joins
+
+SELECT s.name, c.id, c.subject_id, c.student_id, c.score
+FROM students AS s
+LEFT JOIN courses AS c ON c.student_id = s.id;
+
+SELECT s.name, c.id, c.subject_id, c.student_id, c.score
+FROM students AS s
+JOIN courses AS c ON c.student_id = s.id;
+
+SELECT s.id, s.name, c.id, c.subject_id, c.student_id, c.score
+FROM students AS s
+RIGHT JOIN courses AS c ON c.student_id = s.id;
+
+-- FULL JOIN
+SELECT s.id, s.name, c.id, c.subject_id, c.student_id, c.score
+FROM students AS s
+LEFT JOIN courses AS c ON c.student_id = s.id
+UNION
+SELECT s.id, s.name, c.id, c.subject_id, c.student_id, c.score
+FROM students AS s
+RIGHT JOIN courses AS c ON c.student_id = s.id;
+
+SELECT id, name, IF(status=1, 'Habilitado','Deshabilitado') as status FROM products;
+
+-- Funciones MySQL - IF - CASE, always case
+
+SELECT
+        id,
+        name,
+        CASE
+              WHEN status = 0 THEN 'Habilitado'
+              WHEN status = 1 THEN 'Deshabilitado'
+              WHEN status = 2 THEN 'Otro estado'
+              ELSE 'No deberia haber un else'
+        END
+AS status
+FROM products;
+
+SELECT
+        id,
+        name,
+        CASE status
+              WHEN 0 THEN 'Habilitado'
+              WHEN 1 THEN 'Deshabilitado'
+              WHEN 2 THEN 'Otro estado'
+              ELSE 'No deberia haber un else'
+        END
+AS status
+FROM products;
+
+-- SUBSTRING
+
+SELECT id, name, SUBSTR(name, 1, 1) start_width
+FROM products;
+
+SELECT id, name,  CASE SUBSTR(name, 1, 1)
+                  WHEN 'A' THEN 'Letra A'
+                  WHEN 'B' THEN 'Letra B'
+                  END
+FROM products;
+
+SELECT id, name,  UCASE(  CASE SUBSTR(name, 1, 1)
+                          WHEN 'A' THEN 'Letra A'
+                          WHEN 'B' THEN 'Letra B'
+                          END)
+FROM products;
+
+-- fECHAS
+
+SELECT CURRENT_DATE;
+SELECT CURRENT_TIME;
+SELECT CURRENT_TIMESTAMP;
+SELECT NOW();
+SELECT DATABASE();
+SELECT DATEDIFF('2018-06-01','2018-01-01');
+SELECT DATEDIFF(NOW(),'2018-01-01');
+SELECT DAYOFWEEK(NOW());
+
+-- inserts
+
+INSERT INTO students (name) VALUES ('Alumno 1');
+
+INSERT IGNORE INTO table(column_list)
+VALUES( value_list),
+      ( value_list),
+
+INSERT INTO table_name(c1)
+VALUES(c1)
+ON DUPLICATE KEY UPDATE c1 = VALUES(c1) + 1;
+
+-- UPDATE
+
+UPDATE
+
+-- DELETE
+
+DELETE
+
+-- Traer fechas, números de facturas y monto total de las ventas
+
+SELECT date, invoice, total FROM sales;
+
+-- Traer los id de productos, cantidad y precio del detalle de ventas de los registros donde el precio sea mayor a cero
+
+SELECT product_id, amount, price FROM detail_sales WHERE price > 0;
+
+-- Traer el total vendido por fecha de factura
+
+SELECT date, sum(total) as total FROM sales GROUP BY date;
+
+-- Traer el total vendido por año y mes de factura
+SELECT MONTH(date) as month, YEAR(date) as year, SUM(total) as total FROM sales GROUP BY month, year;
+
+-- Traer los productos de la tabla productos que pertenezcan al proveedor 62
+SELECT name, detail, color, status, price, stock, discount, provider_id FROM products WHERE provider_id=62;
