@@ -520,3 +520,51 @@ SELECT MONTH(date) as month, YEAR(date) as year, SUM(total) as total FROM sales 
 
 -- Traer los productos de la tabla productos que pertenezcan al proveedor 62
 SELECT name, detail, color, status, price, stock, discount, provider_id FROM products WHERE provider_id=62;
+
+-- Traer la lista de productos vendidos (solo su id) sin repeticiones y coin el total vendido de cada uno
+select product_id, sum(amount*price) as total from detail_sales group by product_id;
+
+-- Trar fecha de factura, n. factura, id cliente, razón social de cliente y monto total vendido
+select s.date, s.invoice, s.client_id, c.name, s.total from sales as s
+join clients as c on s.client_id = c.id;
+
+-- Traer fecha de factura, no de factura, id producto, descripción de producto, id proveedor, nombre proveedor, precio unitario y parcial (cantidad * precio)
+
+select s.date, s.invoice, ds.product_id, p.name, p.provider_id, pr.name, ds.amount, ds.price, (ds.amount * ds.price) as parcial
+FROM sales  as s
+JOIN detail_sales as ds ON ds.sale_id = s.id
+JOIN products as p ON p.id = ds.product_id
+JOIN providers as pr on pr.id = p.provider_id;
+
+-- traer todos los productos que hayan sido vendidos entre el 14/01/2018 16/01/2018 sin repetir y calcular la cantidad de unidades vendidas
+
+SELECT p.name, s.date, sum(ds.amount)
+from detail_sales as ds
+JOIN sales as s ON s.id = ds.sale_id
+JOIN products as p on p.id = ds.product_id
+WHERE s.date between '2018-01-14' and '2018-01-16'
+GROUP BY p.id;
+
+SELECT p.name, s.date, sum(ds.amount)
+FROM products as p -- Unir por la tabla que menos registros tenga
+JOIN detail_sales as ds ON ds.product_id = p.id
+JOIN sales as s ON s.id = ds.sale_id
+WHERE s.date between '2018-01-14' and '2018-01-16'
+GROUP BY p.id;
+
+-- Traer productos que empiecen con subterraneo
+
+select name from products where name like 'subterraneo%';
+
+-- Traer todos los productos que en su descripción, color o nombre de proveedor tengan el string ferro
+
+SELECT p.name, CONCAT(p.detail, p.color, pr.name) AS fullsearch
+from products as p
+LEFT JOIN providers as pr on pr.id = p.provider_id
+HAVING fullsearch like '%ferron%';
+
+
+SELECT p.name
+from products as p
+JOIN providers as pr on pr.id = p.provider_id
+WHERE CONCAT(p.name, p.detail, p.color, pr.name) like '%ferro%';
