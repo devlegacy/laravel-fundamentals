@@ -27,9 +27,11 @@ window.addEventListener('load', function () {
 }, false);
 
 if (window.location.pathname.includes('museos')) {
-  (async () => {
-    const PNotify = await import(/* webpackPreload: true, webpackChunkName: "js/vendor/PNotify" */ 'pnotify/dist/es/PNotify.js').then(({ default: module }) => module);
-    PNotify.alert('Welcome to museos view');
-  })();
+  // (async () => {
+  //   const PNotify = await import(/* webpackPreload: true, webpackChunkName: "js/vendor/PNotify" */ 'pnotify/dist/es/PNotify.js').then(({ default: module }) => module);
+  //   PNotify.alert('Welcome to museos view');
+  // })();
+
+  PNotify.alert('Welcome to museos view');
 }
 

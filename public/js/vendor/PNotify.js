@@ -1,6 +1,6 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendors~js/vendor/PNotify"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["js/vendor/PNotify"],{
 
-/***/ "./node_modules/pnotify/dist/es/PNotify.js":
+/***/ "XBVm":
 /*!*************************************************!*\
   !*** ./node_modules/pnotify/dist/es/PNotify.js ***!
   \*************************************************/

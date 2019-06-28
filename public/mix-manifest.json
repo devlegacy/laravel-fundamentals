@@ -1,7 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/vendor/bootstrap.js": "/js/vendor/bootstrap.js",
-    "/vendors~js/vendor/PNotify.js": "/vendors~js/vendor/PNotify.js",
-    "/vendors~js/vendor/bootstrap.js": "/vendors~js/vendor/bootstrap.js"
+    "/js/vendor/PNotify.js": "/js/vendor/PNotify.js",
+    "/js/vendor/bootstrap.js": "/js/vendor/bootstrap.js"
 }
