@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', 'Api\UserController@index');
 
+Route::apiResource('categories', 'Api\CategoryController');
 Route::apiResource('products', 'Api\ProductController');
 Route::group(['prefix'=>'products'], function () {
     Route::apiResource('/{product}/reviews', 'Api\ReviewController');
